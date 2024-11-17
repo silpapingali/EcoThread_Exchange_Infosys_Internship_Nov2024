@@ -16,8 +16,17 @@ const Login = () => {
 		try {
 			const url = "http://localhost:8080/api/auth";
 			const { data: res } = await axios.post(url, data);
-			localStorage.setItem("token", res.data);
-			window.location = "/";
+			
+			// Store token and role in local storage
+			localStorage.setItem("token", res.data.token);
+			localStorage.setItem("role", res.data.role);
+	
+			// Redirect based on role
+			if (res.data.role === "admin") {
+				window.location = "/admin-home";
+			} else {
+				window.location = "/user-home";
+			}
 		} catch (error) {
 			if (
 				error.response &&
@@ -28,6 +37,7 @@ const Login = () => {
 			}
 		}
 	};
+	
 
 	return (
 		<div className={styles.login_container}>

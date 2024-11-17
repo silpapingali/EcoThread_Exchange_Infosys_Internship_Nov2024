@@ -11,14 +11,12 @@
 	width: 900px;
 	height: 500px;
 	display: flex;
-	border-radius: 100px;
+	border-radius: 10px; /* Adjusted border radius for consistency */
 	box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
 		0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
-	background-color: #FFF; /* Optional: set white background inside container */
+	background-color: #FFF;
 }
-.form_container h1{
-	color: #decda4;
-}
+
 .left {
 	flex: 2;
 	display: flex;
@@ -35,9 +33,10 @@
 	align-items: center;
 }
 
-.form_container h3 {
+.form_container h1 {
 	font-size: 40px;
 	margin-top: 0;
+	color: #decda4; /* Moved h1 color here */
 }
 
 .input {
@@ -68,17 +67,11 @@
 	gap: 10px;
 }
 
-.signup_text h1 {
-	margin: 0;
-	font-size: 24px; /* Adjust font size as needed */
-	color: #333; /* Adjust color as needed */
-}
-
 .signup_link {
-	font-size: 18px; /* Adjust font size as needed */
-	color: #5cb2b1; /* Adjust color as needed */
+	font-size: 18px;
+	color: #5cb2b1;
 	text-decoration: none;
-	font-weight:500;
+	font-weight: 500;
 	cursor: pointer;
 }
 
@@ -86,21 +79,15 @@
 	text-decoration: underline;
 }
 
-
 .green_btn {
 	border: none;
 	outline: none;
 	padding: 12px 0;
-	background-color: white;
+	background-color: #5cb2b1;
+	color: white;
 	border-radius: 20px;
 	width: 150px;
 	font-weight: bold;
 	font-size: 14px;
 	cursor: pointer;
-}
-
-.green_btn {
-	background-color: #5cb2b1;
-	color: white;
-	margin: 10px;
 }
