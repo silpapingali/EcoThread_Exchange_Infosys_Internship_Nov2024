@@ -1,0 +1,60 @@
+#container2 {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url(../login/eco2.jpg);
+  background-size: cover;
+  background-position: top-center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
+  opacity: 0.9;
+  border-radius: 40px;
+  margin: 100px auto;
+  margin-bottom: 30px;
+}
+.login-form {
+  border-radius: 30px;
+  box-shadow:
+      10px 30px 30px rgba(0, 0, 0, 0.8),
+      10px 40px 80px rgba(0, 0, 0, 0.3);
+  background-color: #607942bd;
+  padding: 20px;
+  text-align: center;
+}
+
+.login-button {
+  background-color: #4a148c;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+  text-align: center;
+
+}
+
+.sign-up-link {
+  color: #4a148c;
+  font-weight: 400;
+  text-decoration: underline;
+}
+h4{
+  font-size: 2rem;
+  font-weight: bold;
+  color: #516639;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.forgot-pass {
+  display: inline-block;
+  text-decoration: underline;
+  color: #4a148c;
+}

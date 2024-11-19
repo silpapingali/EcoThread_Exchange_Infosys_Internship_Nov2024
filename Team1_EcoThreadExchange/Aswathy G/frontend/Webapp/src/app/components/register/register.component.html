@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body id="container1">
+    <div>
+        <div class="container">
+            <h4>Registration Page</h4>
+            <form [formGroup]="registerForm" class="registration-form">
+                <div class="mb-1 ml-2">
+                    <mat-form-field class="w-96 mt-5">
+                        <mat-label for="name">Name</mat-label>
+                        <input type="text" formControlName="name" matInput required>
+                    </mat-form-field>
+                </div>
+
+                <div class="mb-1 ml-2">
+                    <mat-form-field class="w-96">
+                        <mat-label for="email">Email</mat-label>
+                        <input type="email" formControlName="email" matInput required>
+                    </mat-form-field>
+                </div>
+
+                <div class="mb-1 ml-2">
+                    <mat-form-field class="w-96">
+                        <mat-label for="password">Password</mat-label>
+                        <input type="password" formControlName="password" matInput required>
+                    </mat-form-field>
+                </div>
+
+                <div class="mb-2 ml-2">
+                    <mat-form-field class="w-96">
+                        <mat-label for="confirmpassword">Confirm Password</mat-label>
+                        <input type="password" formControlName="confirmpassword" matInput required>
+                    </mat-form-field>
+                </div>
+
+                <div class="mb-4">
+                    <button (click)="register()" [disabled]="registerForm.invalid" type="submit" class="register-button">Register</button>
+                    <a href="http://localhost:4200/login" class="login-button">Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
