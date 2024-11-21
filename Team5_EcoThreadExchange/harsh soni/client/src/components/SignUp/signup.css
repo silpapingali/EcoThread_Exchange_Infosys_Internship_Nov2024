@@ -1,0 +1,113 @@
+.signup_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f2f2f2;
+}
+
+.signup_form_container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 28px;
+    color: #4caf50;
+    margin-bottom: 10px;
+}
+
+h4 {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input:focus {
+    border-color: #4caf50;
+}
+
+.error_msg,
+.success_msg {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.error_msg {
+    background-color: #f44336;
+    color: white;
+}
+
+.success_msg {
+    background-color: #5cb85c;
+    color: white;
+}
+
+.green_btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 12px;
+    border-radius: 20px;
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.green_btn:hover {
+    background-color: #45a049;
+}
+
+.welcome_text {
+    margin-top: 10px;
+}
+
+.signin_link {
+    color: #4caf50;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.signin_link:hover {
+    text-decoration: underline;
+}
+
+.role_selection {
+    margin: 15px 0;
+    font-size: 14px;
+    color: #777;
+}
+
+.role_selection span {
+    cursor: pointer;
+    margin: 0 5px;
+    transition: color 0.3s ease;
+}
+
+.role_selection span:hover {
+    color: #4caf50;
+}
+
+.active {
+    font-weight: bold;
+    color: #4caf50;
+}

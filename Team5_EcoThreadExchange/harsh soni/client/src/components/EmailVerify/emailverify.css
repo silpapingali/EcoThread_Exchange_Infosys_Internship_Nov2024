@@ -1,0 +1,37 @@
+/* Container Styling */
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+}
+
+/* Success Image Styling */
+.success_img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+/* Button Styling */
+.green_btn {
+    border: none;
+    outline: none;
+    padding: 12px 0;
+    background-color: #3bb19b;
+    border-radius: 20px;
+    width: 180px;
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.green_btn:hover {
+    background-color: #2a927b;
+}
