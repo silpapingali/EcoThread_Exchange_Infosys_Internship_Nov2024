@@ -42,7 +42,7 @@ export class ForgotPasswordComponent {
 // Method to send reset link to the email
 sendResetLink(email: string) {
   let value=this.forgotPasswordForm.value;
-  this.authService.forgotPassword(value.email!)
+  this.authService.forgotpassword(value.email!)
     .subscribe({
       next: (response) => {
         this.message='Password reset link has been sent to your email.';

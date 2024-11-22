@@ -36,4 +36,5 @@ async function loginUser(model) {
         return null;
     }
 }
+
 module.exports={registerUser,loginUser}

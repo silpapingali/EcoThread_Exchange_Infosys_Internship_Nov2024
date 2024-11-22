@@ -1,9 +1,19 @@
+
+
 const express=require("express");
 const { registerUser, loginUser } = require("../handlers/auth-handler");
 const bcrypt=require('bcrypt');
 const nodemailer=require('nodemailer');
 const User=require('../db/user');
 const router=express.Router();
+
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cors=require("cors");
+const app = express();
+app.use(bodyParser.json());
+app.use(cors());
+app.use(express.json());
 
 /*
 router.post("/register",async(req,res)=>{
@@ -24,23 +34,54 @@ router.post("/register",async(req,res)=>{
 
 
 */
-router.post('/reset-password', async(req, res) => {
-    const { email } = req.body;
-    try{
 
-        const resetLink ='http://localhost:4200/reset-password';
+router.post('/reset-password',async(req,res)=>{
+    const { email,password } = req.body;
+    console.log('request body:',req.body)
+    if (!email || !password) {
+        return res.status(400).json({ message: 'Email and newpassword are required' });
+      }
+      try{
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const updatedUser=await User.findOneAndUpdate(
+            {email:email},
+    {password:hashedPassword},
+{new:true});
+        if(!updatedUser){
+            return res.status(404).json({message:"user not found"});
+        }
+        res.status(200).json({message:"password updated successfully"});
+
+      }
+      catch (error){
+        console.error(error);
+        res.status(500).json({message:"Server Error"});
+    }
+
+})
+
+
+
+router.post('/forgot-password', async(req, res) => {
+    const { email } = req.body;
+    if (!email ) {
+        return res.status(400).json({ error: 'Email is required' });
+      }
+    try{
+        
+        const resetLink = "http://localhost:4200/reset-password";
         const transporter=nodemailer.createTransport({
             host: 'smtp.gmail.com',
             port: 465,
             secure: true,
             service:'gmail',
             auth:{
-                user:'yashwanth9182444@gmail.com',
-                pass:'wolc bgvg emqr rxns'
+                user:'nirmal01r21@gmail.com',
+                pass:'uxqw nrzg zzdz bhfa'
             }
         });
         const mailOptions={
-            from:'yashwanth9182444@gmail.com',
+            from:'nirmal01r21@gmail.com',
             to:email,
             subject:'Reset Link for Password',
             html:`
@@ -66,10 +107,9 @@ router.post('/reset-password', async(req, res) => {
     }
 });
 
-  
+
 router.post('/register',async (req,res)=>{
     const {name,email,password}=req.body;
-
     try{
         const existingUser=await User.findOne({email});
         if(existingUser){
@@ -78,21 +118,20 @@ router.post('/register',async (req,res)=>{
         const hashedPassword=await bcrypt.hash(password,10);
         const newUser=new User({name,email,password:hashedPassword});
         await newUser.save();
-        /* gmail setting and gmail activation link  */
-        const activationLink=`http://localhost:4200/login`;
+
+        const activationLink= "http://localhost:4200/login";
         const transporter=nodemailer.createTransport({
             host: 'smtp.gmail.com',
             port: 465,
             secure: true,
             service:'gmail',
             auth:{
-                user:'yashwanth9182444@gmail.com',
-                pass:'wolc bgvg emqr rxns'
+                user:'nirmal01r21@gmail.com',
+                pass:'uxqw nrzg zzdz bhfa'
             }
         });
-       
         const mailOptions={
-            from:'yashwanth9182444@gmail.com',
+            from:'nirmal01r21@gmail.com',
             to:email,
             subject:'Activate Your Ecothread Exchange-clothing Account',
             html:`
@@ -112,16 +151,21 @@ router.post('/register',async (req,res)=>{
             });
         });
 
-        
-            
-
     }catch (error){
         console.error(error);
         res.status(500).json({message:"Server Error"});
     }
 });
 
-
+async function connectDb(){
+    await mongoose.connect("mongodb://localhost:27017",{
+        dbName:"infosys"
+    });
+    console.log("MongoDb connected");
+}
+connectDb().catch((err)=>{
+    console.error(err);
+})
 
 
 
