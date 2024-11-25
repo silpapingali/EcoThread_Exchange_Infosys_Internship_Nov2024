@@ -1,3 +1,5 @@
+
+
 const express=require("express");
 const { registerUser, loginUser } = require("../handlers/auth-handler");
 const bcrypt=require('bcrypt');
@@ -5,24 +7,81 @@ const nodemailer=require('nodemailer');
 const User=require('../db/user');
 const router=express.Router();
 
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cors=require("cors");
+const app = express();
+app.use(bodyParser.json());
+app.use(cors());
+app.use(express.json());
 
-router.post('/reset-password', async(req, res) => {
+/*
+router.post("/register",async(req,res)=>{
+    let model=req.body;
+    if(model.name&& model.email && model.password){
+        await registerUser(model);
+        res.send({
+            message:"User registered",
+        });
+    }
+    else{
+        res.status(400).json({
+            error:"Please provide name,email and password",
+            
+        });
+    }
+});
+
+
+*/
+
+router.post('/reset-password',async(req,res)=>{
+    const { email,password } = req.body;
+    console.log('request body:',req.body)
+    if (!email || !password) {
+        return res.status(400).json({ message: 'Email and newpassword are required' });
+      }
+      try{
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const updatedUser=await User.findOneAndUpdate(
+            {email:email},
+    {password:hashedPassword},
+{new:true});
+        if(!updatedUser){
+            return res.status(404).json({message:"user not found"});
+        }
+        res.status(200).json({message:"password updated successfully"});
+
+      }
+      catch (error){
+        console.error(error);
+        res.status(500).json({message:"Server Error"});
+    }
+
+})
+
+
+
+router.post('/forgot-password', async(req, res) => {
     const { email } = req.body;
+    if (!email ) {
+        return res.status(400).json({ error: 'Email is required' });
+      }
     try{
-
-        const resetLink ='http://localhost:4200/reset-password';
+        
+        const resetLink = "http://localhost:4200/reset-password";
         const transporter=nodemailer.createTransport({
             host: 'smtp.gmail.com',
             port: 465,
             secure: true,
             service:'gmail',
             auth:{
-                user:'nirmal01r21@gmail.com',
-                pass:'uxqw nrzg zzdz bhfa'
+                user:'yashwanth9182444@gmail.com',
+                pass:'wolc bgvg emqr rxns'
             }
         });
         const mailOptions={
-            from:'nirmal01r21@gmail.com',
+            from:'yashwanth9182444@gmail.com',
             to:email,
             subject:'Reset Link for Password',
             html:`
@@ -48,61 +107,9 @@ router.post('/reset-password', async(req, res) => {
     }
 });
 
-//  Reset Password API
-router.post('/reset-password', async (req, res) => {
-    const { email, password } = req.body;
-  
-    try {
-      // Check if the email exists in the database
-      const user = await User.findOne({ email });
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-      }
-  
-      // Hash the new password
-      const hashedPassword = await bcrypt.hash(password, 10);
-  
-      // Update password in the database
-      user.password = hashedPassword;
-      await user.save();
-  
-      res.status(200).json({ message: 'Password reset successful' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Failed to reset password. Please try again.' });
-    }
-  });
-        
 
-//  Login API
-router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
-
-    try {
-        const user = await User.findOne({ email: email });
-
-        if (!user) {
-            console.log('User not found:', email);
-            return res.status(400).send({ message: 'User not found.' });
-        }
-        console.log('User from DB:', user);
-        // Compare the entered password with the hashed password
-        const isMatch = await bcrypt.compare(password, user.password);
-        console.log('Password Match:', isMatch);
-
-        if (isMatch) {
-            res.status(200).send({ message: 'Login successful.' });
-        } else {
-            res.status(400).send({ message: 'Invalid credentials.' });
-        }
-    } catch (error) {
-        res.status(500).send({ message: 'Error during login.', error });
-    }
-});
-  
 router.post('/register',async (req,res)=>{
     const {name,email,password}=req.body;
-
     try{
         const existingUser=await User.findOne({email});
         if(existingUser){
@@ -111,8 +118,8 @@ router.post('/register',async (req,res)=>{
         const hashedPassword=await bcrypt.hash(password,10);
         const newUser=new User({name,email,password:hashedPassword});
         await newUser.save();
-        /* gmail setting and gmail activation link  */
-        const activationLink=`http://localhost:4200/login`;
+
+        const activationLink= "http://localhost:4200/login";
         const transporter=nodemailer.createTransport({
             host: 'smtp.gmail.com',
             port: 465,
@@ -123,7 +130,6 @@ router.post('/register',async (req,res)=>{
                 pass:'wolc bgvg emqr rxns'
             }
         });
-       
         const mailOptions={
             from:'yashwanth9182444@gmail.com',
             to:email,
@@ -145,16 +151,21 @@ router.post('/register',async (req,res)=>{
             });
         });
 
-        
-            
-
     }catch (error){
         console.error(error);
         res.status(500).json({message:"Server Error"});
     }
 });
 
-
+async function connectDb(){
+    await mongoose.connect("mongodb://localhost:27017",{
+        dbName:"infosys"
+    });
+    console.log("MongoDb connected");
+}
+connectDb().catch((err)=>{
+    console.error(err);
+})
 
 
 
