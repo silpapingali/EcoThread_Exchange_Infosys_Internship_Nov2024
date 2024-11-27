@@ -8,6 +8,6 @@ import { tokenHttpInterceptor } from './core/token-http-interceptor'
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideAnimationsAsync(), provideAnimationsAsync(),
-    provideHttpClient(withInterceptors([tokenHttpInterceptor])), provideAnimationsAsync(), provideAnimationsAsync(), provideAnimationsAsync(),
+    provideHttpClient(withInterceptors([tokenHttpInterceptor])),
   ]
 };

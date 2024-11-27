@@ -1,4 +1,4 @@
-import { Component, inject, ChangeDetectionStrategy, NgModule, ViewChild } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy,NgModule,ViewChild } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators, NgModel } from '@angular/forms'; // Added FormGroup
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -6,11 +6,28 @@ import { AuthService } from '../../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
-import { FormControl, FormGroup, FormArray } from '@angular/forms';
-import { NgForm } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
+import { FormControl,FormArray,FormGroup } from '@angular/forms';
+import { NgForm} from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { response } from 'express';
+import { error } from 'console';
+
+@Component({
+  selector: 'app-register',
+  templateUrl: 'registerdialog.html',
+  standalone: true,
+  imports: [MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule,ReactiveFormsModule,],
+
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class DialogElementsExampleDialog {
+  refreshpage() {
+    window.location.reload();
+  }
+}
 
 @Component({
   selector: 'app-register',
@@ -23,9 +40,8 @@ import { CommonModule } from '@angular/common';
 export class RegisterComponent {
   formbuilder = inject(FormBuilder);
   authService = inject(AuthService);
-  errorMessage:string='';
-  router = inject(Router);
-
+  errorMessage: string = '';
+  routerr = inject(Router);
   registerForm = this.formbuilder.group(
     {
       name: ['', [Validators.required]],
@@ -48,22 +64,20 @@ export class RegisterComponent {
       confirmPassword?.setErrors(null);
     }
   }
-  constructor(private http: HttpClient, private route: Router){}
+constructor(private http: HttpClient, private router: Router){}
   register() {
-    let user= this.registerForm.value;
-      this.authService.register(user.name!, user.email!, user.password!).subscribe({
-        next: (result) => {
-          this.router.navigate(['/login'])
-        },
-        error: (error) => {
-          if(error.status===400){
-            alert(error.error.message || 'An error occured, Please try again.');
-            this.router.navigate(['/login']);
-          }
-          else{
-            alert('Server error. Please try again later.');
-          }
-        },
-      });
+   let user=this.registerForm.value;
+   this.authService.register(user.name!,user.email!,user.password!).subscribe({
+    next: (response) => {
+      this.router.navigate(['/login']);
+    },
+    error: (error) =>{
+  if(error.status ===400){
+      alert(error.error.message || 'an error occurred. Please try again.' );
+      this.router.navigate(['/login']);
+    } else {
+      alert('server error. Please try again later.');
     }
-}
+   }
+  });
+}}

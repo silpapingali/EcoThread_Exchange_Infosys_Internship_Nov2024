@@ -1,60 +1,8 @@
-body {
-  margin: 0;
-  padding: 0;
-}
+#container1{
+    width: 100vw;
+    height: 110vh;
+    background-image: url(../register/eco2.jpg);
+    background-size:cover;
+    
 
-#container1 {
-  width: 100%;
-  min-height: 100vh;
-  background-image: url(../register/eco2.jpg);
-  background-size: cover;
-  background-position: top-center;
-  background-repeat: no-repeat;
-  display: flex;
-  justify-content: center;
-}
-
-.container {
-  text-align: center;
-  width: 100%;
-  max-width: 500px;
-  opacity: 0.9;
-  border-radius: 40px;
-  margin: 130px auto;
-  margin-bottom: 30px;
-}
-
-.registration-form {
-  text-align: center;
-  border-radius: 30px;
-  box-shadow:
-      10px 30px 30px rgba(0, 0, 0, 0.8),
-      10px 40px 80px rgba(0, 0, 0, 0.3);
-  background-color: #607942bd;
-  padding: 20px;
-  margin: 20px;
-}
-
-.register-button, .login-button {
-  background-color: #4a148c;
-  color: white;
-  font-weight: bold;
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-decoration: none;
-  display: inline-block;
-  margin-top: 10px;
-}
-
-.login-button {
-  margin-left: 30px;
-}
-
-h4{
-    font-size: 2rem;
-    font-weight: bold;
-    color: #516639;
-    text-align: center;
-    margin-top: 40px;
-    margin-bottom: 20px;
 }

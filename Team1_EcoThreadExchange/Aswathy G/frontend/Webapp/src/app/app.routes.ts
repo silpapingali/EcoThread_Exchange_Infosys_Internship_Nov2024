@@ -6,6 +6,8 @@ import { authGaurd } from './core/auth-guard';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
+
+
 export const routes: Routes = [
     {
         path:"home",
@@ -21,12 +23,12 @@ export const routes: Routes = [
         path:"login",
         component:LoginComponent
     },
-    {
-      path: "forgot-password",
+    { path: "forgot-password", 
       component: ForgotPasswordComponent
     },
     {
-      path: "reset-password",
+      path:"reset-password",
       component: ResetPasswordComponent
     }
+    
 ];

@@ -2,8 +2,6 @@ import { Injectable,inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { env } from 'process';
-import { catchError, throwError } from 'rxjs';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -16,6 +14,17 @@ export class AuthService {
       name,email,password,
     });
   }
+  resetpassword(email:string,password:string){
+    return this.http.post(environment.apiUrl+'/auth/reset-password',{
+      email,
+      password:password
+    })
+  }
+  forgotpassword(email:string){
+    return this.http.post(environment.apiUrl+'/auth/forgot-password',{
+      email
+    });
+  }
 
   login(email:string,password:string){
     return this.http.post(environment.apiUrl+'/auth/login',{
@@ -23,15 +32,8 @@ export class AuthService {
     });
   }
 
-  forgotpassword(email: string) {
-    return this.http.post(environment.apiUrl + '/auth/forgot-password', {
-      email
-    }).pipe(
-      catchError(err => {
-        return throwError(() => new Error('Error sending password reset email'));
-      })
-    );
-  }
+  
+
 
   get isLoggedIn(){
     let token=localStorage.getItem("token");
@@ -55,7 +57,7 @@ export class AuthService {
     }
     return null;
   }
-
+  
   get userEmail(){
     let userData=localStorage.getItem("user");
     if(userData){

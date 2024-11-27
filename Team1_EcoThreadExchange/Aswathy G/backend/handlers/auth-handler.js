@@ -9,6 +9,7 @@ async function registerUser(model){
         name:model.name,
         email:model.email,
         password:hashPassword,
+        
     });
     await user.save();
 }
@@ -35,4 +36,5 @@ async function loginUser(model) {
         return null;
     }
 }
+
 module.exports={registerUser,loginUser}
