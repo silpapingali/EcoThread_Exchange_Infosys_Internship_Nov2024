@@ -76,12 +76,12 @@ router.post('/forgot-password', async(req, res) => {
             secure: true,
             service:'gmail',
             auth:{
-                user:'nirmal01r21@gmail.com',
-                pass:'uxqw nrzg zzdz bhfa'
+                user:'yashwanth9182444@gmail.com',
+                pass:'wolc bgvg emqr rxns'
             }
         });
         const mailOptions={
-            from:'nirmal01r21@gmail.com',
+            from:'yashwanth9182444@gmail.com',
             to:email,
             subject:'Reset Link for Password',
             html:`
@@ -126,12 +126,12 @@ router.post('/register',async (req,res)=>{
             secure: true,
             service:'gmail',
             auth:{
-                user:'nirmal01r21@gmail.com',
-                pass:'uxqw nrzg zzdz bhfa'
+                user:'yashwanth9182444@gmail.com',
+                pass:'wolc bgvg emqr rxns'
             }
         });
         const mailOptions={
-            from:'nirmal01r21@gmail.com',
+            from:'yashwanth9182444@gmail.com',
             to:email,
             subject:'Activate Your Ecothread Exchange-clothing Account',
             html:`
