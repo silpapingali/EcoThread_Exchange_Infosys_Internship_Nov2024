@@ -42,25 +42,24 @@ router.post("/", async (req, res) => {
 router.get("/:id/verify/:token", async (req, res) => {
   try {
 
-     // Check if the user exists
+   
     const user = await User.findOne({ _id: req.params.id });
     if (!user) return res.status(400).send({ message: "Invalid link" });
 
 
-    // Check if the token exists
+   
     const token = await Token.findOne({
       userId: user._id,
       token:req.params.token
     });
 	if(!token) return res.status(400).send({message:"invalid link"});
 
-  // Update the user's verified status using save
+
   user.verified = true;
-  await user.save();  // First method: fetch, modify, and save
+  await user.save();  
 
 
-  // Update user's verified status
-  // await User.updateOne({ _id: user._id }, { $set: { verified: true } });
+  
 
 
 
@@ -69,7 +68,7 @@ router.get("/:id/verify/:token", async (req, res) => {
 
 
 
-  // Redirect or send a success response
+  
 	res.status(200).send({message: "Email verified successfully"});
 
   } catch (error) {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "./signup.css"; // Import plain CSS
+import "./signup.css"; 
 
 const Signup = () => {
     const [data, setData] = useState({
@@ -9,7 +9,7 @@ const Signup = () => {
         lastName: "",
         email: "",
         password: "",
-        role: "user", // Default role
+        role: "user", 
     });
     const [error, setError] = useState("");
     const [msg, setMsg] = useState("");
@@ -24,7 +24,7 @@ const Signup = () => {
             const url = "http://localhost:8080/api/users";
             const { data: res } = await axios.post(url, data);
             setMsg(res.message);
-            setError(""); // Clear error on success
+            setError(""); 
         } catch (error) {
             if (
                 error.response &&
@@ -32,12 +32,12 @@ const Signup = () => {
                 error.response.status <= 500
             ) {
                 setError(error.response.data.message);
-                setMsg(""); // Clear message on error
+                setMsg(""); 
             }
         }
     };
 
-    // Handle role selection
+   
     const handleRoleSelect = (role) => {
         setData({ ...data, role });
     };

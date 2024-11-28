@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import Login from "./components/Login"; // Login Component
-import Signup from "./components/SignUp"; // Signup Component
-import AdminHomePage from "./components/adminMain"; // Admin Homepage Component
-import UserHomePage from "./components/userMain"; // User Homepage Component
+import Login from "./components/Login"; 
+import Signup from "./components/SignUp"; 
+import AdminHomePage from "./components/adminMain"; 
+import UserHomePage from "./components/userMain"; 
 import EmailVerify from "./components/EmailVerify";
 
 const App = () => {
-    // Retrieve token and role from localStorage
+ 
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
 
@@ -18,6 +18,7 @@ const App = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
+                    
                 
 
                 {/* Role-Based Redirection */}
