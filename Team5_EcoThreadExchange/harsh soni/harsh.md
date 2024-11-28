@@ -3,4 +3,4 @@ Case1 : Completed login page, signup page and Successfully connected to Mongodb 
 
 Case2 : During Signup Add Email Verification(JWT) after sucessfully it show verfied Successfully
 
-Case3: Forget Pass is Remaining (DUE TO ESE EXAMINATION)
+Case3: Forget Pass is sucessfully done
