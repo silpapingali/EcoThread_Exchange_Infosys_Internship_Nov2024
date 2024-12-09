@@ -1,0 +1,66 @@
+/* ViewItem.css */
+
+.view-item-container {
+    display: flex;
+    align-items: flex-start;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.view-item-image {
+    width: 300px;
+    height: auto;
+    border-radius: 4px;
+    margin-right: 20px;
+}
+
+.view-item-details {
+    flex: 1;
+    text-align: left;
+}
+
+.view-item-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.view-item-details p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+.trade-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.trade-button:hover {
+    background-color: #45a049;
+}
+
+.go-back-button {
+    background-color: #ccc;
+    color: #333;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.go-back-button:hover {
+    background-color: #bbb;
+}
