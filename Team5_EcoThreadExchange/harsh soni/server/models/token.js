@@ -1,23 +1,14 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
-// Token schema to store user verification tokens
 const tokenSchema = new Schema({
   userId: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: "User",  // Reference to the User model
-    unique: true,  // Ensures only one token per user
+    ref: "user",
+    unique: true,
   },
-  token: { 
-    type: String, 
-    required: true 
-  },
-  createdAt: { 
-    type: Date, 
-    default: Date.now, 
-    expires: 3600  // Expiration time (1 hour)
-  },
+  token: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now(), expires: 3600 }, // 1 Hour
 });
 
-module.exports = mongoose.model("Token", tokenSchema);
+module.exports = mongoose.model("token", tokenSchema);
