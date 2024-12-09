@@ -1,0 +1,128 @@
+.Navbar {
+    height: 60px;
+    display: flex;
+    justify-content: space-between; /* Space between logo and items */
+    align-items: center; /* Center vertically */
+    background: #4eb6b0;
+    padding: 0 20px; /* Add some padding for centering */
+  }
+  
+  .navLogo {
+    font-weight: 700;
+    font-size: 21px;
+    color: #ffffff;
+  }
+  
+  .navItems {
+    display: flex;
+    align-items: center; /* Vertically center items */
+    margin-right: 150px; /* Ensure some space on the right of the navbar */
+  }
+  
+  .navButton {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    text-decoration: none;
+    margin: 0 30px; /* Spacing between buttons */
+    position: relative;
+    opacity: 0.9;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .navButton:hover {
+    opacity: 1;
+  }
+  
+  .navButton::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: #d0cba4;
+    transition: all 0.45s;
+  }
+  
+  .navButton:hover::before {
+    width: 100%;
+  }
+  
+  .navToggle {
+    display: none;
+  }
+  
+  @media (max-width: 700px) {
+    .navItems {
+      position: absolute;
+      top: 60px; /* Start right below the Navbar */
+      display: flex;
+      flex-direction: column;
+      background: #4eb6b0; /* Consistent background color for mobile menu */
+      left: 0;
+      width: 100%; /* Full-width menu */
+      height: calc(100% - 60px); /* Occupy remaining vertical space */
+      transform: translateX(-100%); /* Hide menu by default */
+      transition: transform 0.45s ease-in-out;
+      padding-top: 20px; /* Add spacing for links */
+    }
+  
+    .navItems.open {
+      transform: translateX(0); /* Show menu when open */
+    }
+  
+    .navToggle {
+      display: flex; /* Display toggle button */
+      width: 50px;
+      height: 50px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin-right: 20px; /* Spacing for toggle */
+    }
+  
+    .bar {
+      position: relative;
+      width: 32px;
+      height: 2px;
+      background: #d0cba4;
+      transition: all 0.45s ease-in-out;
+    }
+  
+    .bar::before,
+    .bar::after {
+      content: "";
+      position: absolute;
+      height: 2px;
+      background: #d0cba4;
+      border-radius: 2px;
+      transition: all 0.45s ease-in-out;
+    }
+  
+    .bar::before {
+      width: 25px;
+      transform: translateY(-8px);
+    }
+  
+    .bar::after {
+      width: 32px;
+      transform: translateY(8px);
+    }
+  
+    .open .bar {
+      background: transparent;
+    }
+  
+    .open .bar::before {
+      width: 32px;
+      transform: rotate(45deg) translate(5px, -5px);
+    }
+  
+    .open .bar::after {
+      transform: rotate(-45deg) translate(5px, 5px);
+    }
+  }
+  

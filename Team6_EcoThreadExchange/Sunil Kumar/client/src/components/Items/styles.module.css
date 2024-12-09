@@ -1,0 +1,12 @@
+.container {
+    padding: 20px;
+    background-color: #f7fafc;
+    min-height: calc(100vh - 60px);
+  }
+  
+  .content {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 20px;
+    margin-top: 20px;
+  }

@@ -1,15 +1,42 @@
-.homePage {
+.container {
+	min-height: 100vh;
+	background-color: #f7fafc;
+  }
+  
+  .main {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 2rem;
+	padding-bottom: 5rem;
+  }
+  
+  .section {
+	margin-bottom: 2rem;
+  }
+  
+  .sectionHeader {
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
-	height: 100vh;
-	background-color: #f0f8ff;
-	margin: 0;
+	margin-bottom: 1rem;
   }
   
-  .homeText {
-	font-family: 'Arial, sans-serif';
-	font-size: 2.5rem;
-	color: #da0000;
+  .button {
+	background-color: #4fd1c5;
+	color: white;
+	border: none;
+	padding: 0.5rem 1rem;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.2s;
   }
   
+  .button:hover {
+	background-color: #38b2ac;
+  }
+  
+  .grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: 1.5rem;
+  }
