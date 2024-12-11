@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from './Header';
 import Footer from './Footer';
 import ProductCard from './ProductCard';
 import styles from './styles.module.css';
@@ -40,7 +39,6 @@ const UserMain = () => {
 
   return (
     <div className={styles.container}>
-      <Header />
       <main className={styles.main}>
         <section className={styles.section}>
           <div className={styles.sectionHeader}>

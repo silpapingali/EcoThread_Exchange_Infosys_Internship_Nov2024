@@ -6,7 +6,9 @@ import AdminHomePage from "./components/adminMain/index";
 import UserHomePage from "./components/userMain/index";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
+import NewItem from "./components/NewItem/index";
 import Items from "./components/Items";
+import Layout from "./components/Layout";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -16,15 +18,13 @@ function App() {
     <Routes>
       {/* Role-based redirection */}
       {token && role === "admin" ? (
-        <>
-          <Route path="/" element={<AdminHomePage />} />
-          <Route path="/items" element={<Items />} />
-        </>
+        <Route path="/" element={<AdminHomePage />} />
       ) : token && role === "user" ? (
-        <>
+        <Route element={<Layout />}>
           <Route path="/" element={<UserHomePage />} />
           <Route path="/items" element={<Items />} />
-        </>
+          <Route path="/new-item" element={<NewItem />} />
+        </Route>
       ) : (
         <Route path="/" element={<Navigate replace to="/login" />} />
       )}

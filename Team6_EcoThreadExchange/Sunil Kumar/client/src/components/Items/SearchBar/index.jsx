@@ -3,7 +3,6 @@ import styles from './styles.module.css';
 
 const SearchBar = ({ searchQuery, setSearchQuery }) => {
   const handleSearch = (e) => {
-    e.preventDefault();
     setSearchQuery(e.target.value);
   };
 

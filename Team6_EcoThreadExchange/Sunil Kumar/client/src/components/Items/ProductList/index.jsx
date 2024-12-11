@@ -1,36 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles.module.css';
 
-const ProductList = ({ items }) => {
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
-    });
-  };
+const ProductList = ({ refresh }) => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/products');
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchProducts();
+  }, [refresh]);
 
   return (
     <div className={styles.productList}>
-      {items.map((item, index) => (
-        <div key={index} className={styles.productCard}>
-          <img src={item.image} alt={item.title} className={styles.productImage} />
+      {products.map((product) => (
+        <div key={product._id} className={styles.productCard}>
+          {product.image && <img src={product.image} alt={product.title} className={styles.productImage} />}
           <div className={styles.productInfo}>
-            <h3>{item.title}</h3>
-            <p className={styles.description}>{item.description}</p>
+            <h3>{product.title}</h3>
+
+            <div className={styles.sizeCondition}>
+              <p className={styles.description}>Size: {product.size}</p>
+              <p className={styles.description}>Condition: {product.condition}</p>
+            </div>
+
+            <div className={styles.preferencesContainer}>
+              <p className={styles.description}>Preferences:</p>
+              <div className={styles.preferences}>
+                {product.preferences.map((pref, index) => (
+                  <span key={index} className={styles.preference}>
+                    {pref}
+                  </span>
+                ))}
+              </div>
+            </div>
+
             <p className={styles.postedBy}>
-              Posted by {item.postedBy} on {formatDate(item.date)}
+              Posted on: {new Date(product.postedDate).toLocaleDateString()}
             </p>
-            <div className={styles.preferences}>
-              <p>Prefer:</p>
-              {item.preferences.map((pref, idx) => (
-                <span key={idx} className={styles.preference}>{pref}</span>
-              ))}
-            </div>
-            <div className={styles.trades}>
-              <span>Trades: {item.trades}</span>
-            </div>
           </div>
         </div>
       ))}

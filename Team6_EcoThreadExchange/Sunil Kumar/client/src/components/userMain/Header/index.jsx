@@ -17,7 +17,7 @@ const Header = () => {
           Items
         </button>
         <button onClick={() => navigate('/trades')} className={styles.navButton}>
-          Trade
+          Trading
         </button>
         <button onClick={() => navigate('/logout')} className={styles.navButton}>
           Logout
