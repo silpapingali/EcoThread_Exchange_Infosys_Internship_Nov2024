@@ -5,19 +5,21 @@ import Home from './Components/Home';
 import ForgotPassword from './Components/ForgotPassword';
 import ResetPassword from './Components/ResetPassword';
 import DashBoard from './Components/DashBoard';
+import Items from './Components/Items';
+import Trades from './Components/Trades';
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/signup" />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login/>}></Route>
-        <Route path="/home" element={<Home></Home>}></Route>
-        <Route path="/forgotPassword" element={<ForgotPassword/>}></Route>
-        <Route path="/resetPassword/:token" element={<ResetPassword/>}></Route>
-        <Route path="/dashboard" element={<DashBoard/>}></Route>
-        
-
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/forgotPassword" element={<ForgotPassword />} />
+        <Route path="/resetPassword/:token" element={<ResetPassword />} />
+        <Route path="/dashboard" element={<DashBoard />} />
+        <Route path="/items" element={<Items />} />
+        <Route path="/trades" element={<Trades />} />
       </Routes>
     </BrowserRouter>
   );
