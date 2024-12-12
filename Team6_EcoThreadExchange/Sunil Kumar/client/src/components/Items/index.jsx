@@ -19,8 +19,8 @@ const Items = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <button 
-          onClick={() => navigate('/new-item')} 
+        <button
+          onClick={() => navigate('/new-item')}
           className={styles.addButton}
         >
           Add New Item
@@ -34,8 +34,13 @@ const Items = () => {
           dateFilter={dateFilter}
           setDateFilter={setDateFilter}
         />
-        {/* Pass refresh state to ProductList */}
-        <ProductList refresh={refresh} />
+        {/* Pass search, filters, and refresh to ProductList */}
+        <ProductList
+          refresh={refresh}
+          searchQuery={searchQuery}
+          tradesFilter={tradesFilter}
+          dateFilter={dateFilter}
+        />
       </div>
     </div>
   );

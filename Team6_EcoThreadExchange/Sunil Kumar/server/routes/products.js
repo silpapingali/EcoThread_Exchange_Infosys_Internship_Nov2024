@@ -52,4 +52,25 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+
+// GET route for fetching a single product by ID
+router.get('/:id', async (req, res) => {
+  try {
+    const product = await ProductDetails.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found.' });
+    }
+    res.status(200).json({
+      ...product._doc,
+      image: product.imageData
+        ? `data:${product.imageMimeType};base64,${product.imageData.toString('base64')}`
+        : null,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to fetch product details.' });
+  }
+});
+
 module.exports = router;

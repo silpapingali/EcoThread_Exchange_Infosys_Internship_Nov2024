@@ -6,9 +6,10 @@ import AdminHomePage from "./components/adminMain/index";
 import UserHomePage from "./components/userMain/index";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
-import NewItem from "./components/NewItem/index";
-import Items from "./components/Items";
 import Layout from "./components/Layout";
+import Items from "./components/Items";
+import NewItem from "./components/NewItem";
+import ProductDetails from "./components/Items/productDetails";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -23,6 +24,8 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<UserHomePage />} />
           <Route path="/items" element={<Items />} />
+          <Route path="/products/:id" element={<ProductDetails />} />
+          <Route path="/items/:id" element={<ProductDetails />} />
           <Route path="/new-item" element={<NewItem />} />
         </Route>
       ) : (
