@@ -1,0 +1,122 @@
+/* General styles for the Items page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: white; /* Matches the dashboard background */
+    margin: 0;
+    padding: 0;
+    color: #fff;
+  }
+  
+  /* Container for the entire items page */
+
+  
+  /* Header section styling */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .header h2 {
+    font-size: 24px;
+    color: #fff;
+  }
+  
+  .go-back-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .go-back-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Item details section */
+  .item-details {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  
+  /* Item image styling */
+  .item-image img {
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid #007bff; /* Highlight border */
+  }
+  
+  /* Item information section */
+  .item-info {
+    flex: 1;
+    background-color: white; /* Matches the page background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .item-info h3 {
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  
+  /* Form styling */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  label {
+    font-size: 14px;
+    color: #ccc;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+  }
+  
+  input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  /* Post button styling */
+  .post-button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .post-button:hover {
+    background-color: #218838;
+  }
+  
+  /* Footer styling */
+  footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    color: #ccc;
+    font-size: 14px;
+  }
+  
