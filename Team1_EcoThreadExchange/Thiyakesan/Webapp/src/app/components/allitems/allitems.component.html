@@ -1,0 +1,307 @@
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    /* Page Container: Flexbox to layout sidebar and content */
+.page-container {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+  background-color: #f4f4f9;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 30%; /* Sidebar takes 30% of the page width */
+  background-color: #069494; /* Sidebar full color */
+  padding: 20px;
+  color: white;
+  box-shadow: 4px 0 8px rgba(0, 0, 0, 0.1);
+  height: 100vh; /* Full height of the screen */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Search Box Styling */
+.search-box {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+}
+
+/* Filters Section Styling */
+.filters {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.filter {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.filter label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.filter input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+}
+
+/* Content Area Styles */
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Loading, Error, and No Items */
+.loading, .error, .no-items {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.loading p, .error p, .no-items p {
+  color: #333;
+}
+
+/* Styles for All Item Cards */
+.item-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.item-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.item-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.item-card-header {
+  background-color: #069494;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.item-card-body {
+  padding-top: 15px;
+  flex-grow: 1;
+}
+
+.item-card-body p {
+  margin: 8px 0;
+}
+
+.item-image img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.item-image p {
+  text-align: center;
+  color: #777;
+}
+
+.item-card-footer {
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* Trade Button Styling */
+.trade-button {
+  background-color: #069494;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.trade-button:hover {
+  background-color: #45a049;
+}
+
+/* Mobile Responsiveness: Stack the items and sidebar */
+@media (max-width: 768px) {
+  .page-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+  }
+
+  .content {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .item-list {
+    grid-template-columns: 1fr;
+  }
+  
+}
+.navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #069494; 
+      padding: 10px 20px;
+      color: white;
+      font-family: 'Dancing Script', cursive;
+      font-weight: bold;
+      font-size: 110%;
+    }
+    .navbar-left .brand-name {
+      font-size: 1.8em;
+      font-weight: bold;
+    }
+    .navbar-right {
+      display: flex;
+      justify-content: space-between;
+      flex-grow: 1;
+      max-width: 600px;
+    }
+    .nav-link {
+      text-decoration: none;
+      color: white;
+      font-size: 1.2em;
+      padding: 0 15px;
+      text-align: center;
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover {
+      color: #333;
+      text-decoration: underline;
+    }
+
+</style>
+<body>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <span class="brand-name">Threads & Thrift</span>
+    </div>
+    <div class="navbar-right">
+      <a href="http://localhost:4200/home" class="nav-link">Dashboard</a>
+      <a href="http://localhost:4200/trade-items-form" class="nav-link">New Trade Item</a>
+      <a href="http://localhost:4200/mytrades" class="nav-link">Trades</a>
+      <a href="#" class="nav-link">Logout</a>
+    </div>
+  </nav>
+  
+      
+    
+</body>
+<!-- Container for the entire page -->
+<div class="page-container">
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+      <!-- Search Box at the Top -->
+      <div class="search-box">
+        <input type="text" placeholder="Search Items..." class="search-input" />
+      </div>
+  
+      <!-- Filters Section (Date, Range, Checkbox) -->
+      <div class="filters">
+        <!-- Date Filter -->
+        <div class="filter">
+          <label for="date">Date:</label>
+          <input type="date" id="date" />
+        </div>
+  
+        <!-- Range Filter -->
+        <div class="filter">
+          <label for="range">Range:</label>
+          <input type="range" id="range" min="0" max="100" />
+        </div>
+  
+        <!-- Checkbox Filter -->
+        <div class="filter">
+          <label for="available">Available:</label>
+          <input type="checkbox" id="available" />
+        </div>
+      </div>
+    </div>
+  
+    <!-- Main Content Area -->
+    <div class="content">
+      <!-- Loading Spinner -->
+      <div *ngIf="loading" class="loading">
+        <p>Loading all items...</p>
+      </div>
+  
+      <!-- Error Message -->
+      <div *ngIf="!loading && errorMessage" class="error">
+        <p>{{ errorMessage }}</p>
+      </div>
+  
+      <!-- No Items Found -->
+      <div *ngIf="!loading && !errorMessage && allItems.length === 0" class="no-items">
+        <p>No items found.</p>
+      </div>
+  
+      <!-- Display All Items -->
+      <div *ngIf="!loading && !errorMessage && allItems.length > 0" class="item-list">
+        <div *ngFor="let item of allItems" class="item-card">
+          <div class="item-card-header">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.createdAt | date: 'short' }}</p>
+          </div>
+          <div class="item-card-body">
+            <p><strong>Size:</strong> {{ item.size }}</p>
+            <p><strong>Condition:</strong> {{ item.condition }}</p>
+            <p><strong>Preferences:</strong> {{ item.preferences.join(', ') }}</p>
+            <div class="item-image">
+              <img *ngIf="item.image" [src]="'http://localhost:3000/uploads/' + item.image" alt="{{ item.title }}" />
+              <p *ngIf="!item.image">No image available</p>
+            </div>
+          </div>
+          <!-- Trade Button -->
+          <div class="item-card-footer">
+            <button class="trade-button">Trade Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
