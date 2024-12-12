@@ -32,7 +32,7 @@ const ViewItem = () => {
         <p>Size: {item.size}</p>
         <p>Description: {item.description}</p>
         <p>Price: &#8377; {item.price.toLocaleString("en-IN")}</p>
-        <p>Location: {item.location}, {item.country}</p>
+        {/* <p>Location: {item.location}, {item.country}</p> */}
         {/* <p>Condition: {item.condition}</p> */}
         <p>Preferences: {item.preferences}</p>
         <p>Posted by: {item.postedBy} on {item.createdAt ? new Date(item.createdAt).toLocaleDateString() : new Date().toLocaleDateString()}</p>

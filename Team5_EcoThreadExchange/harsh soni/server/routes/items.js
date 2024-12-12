@@ -30,8 +30,8 @@ router.post("/", upload.single('image'), async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       price: req.body.price,
-      country: req.body.country,
-      location: req.body.location,
+      // country: req.body.country,
+      // location: req.body.location,
       preferences: req.body.preferences,
       size: req.body.size,
       image: req.file.path.replace(/\\/g, '/'), // Replace backslashes with forward slashes
@@ -66,15 +66,15 @@ router.get("/:id", async (req, res) => {
 
 // Update item by ID
 router.put("/:id", upload.single('image'), async (req, res) => {
-  const { title, description, price, country, location, preferences, size } = req.body;
+  const { title, description, price, preferences, size } = req.body;
 
   try {
     const updatedItem = await Item.findByIdAndUpdate(req.params.id, {
       title,
       description,
       price,
-      country,
-      location,
+      // country,
+      // location,
       preferences,
       size,
     }, { new: true });
