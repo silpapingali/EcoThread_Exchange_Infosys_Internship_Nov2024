@@ -55,10 +55,10 @@ const PublicListings = () => {
       <div className="content-container">
         <div className="filter-container">
           <h2>Filters</h2>
-          <div className="filter">
+          {/* <div className="filter">
             <label>Exact Match</label>
             <input type="checkbox" />
-          </div>
+          </div> */}
           <div className="filter">
             <label>Trades greater than</label>
             <input
@@ -88,7 +88,7 @@ const PublicListings = () => {
                 <h4>{listing.title}</h4>
                 <p>Size: {listing.size}</p>
                 <p>Price: &#8377; {listing.price.toLocaleString("en-IN")}</p>
-                <p>Location: {listing.location}, {listing.country}</p>
+                {/* <p>Location: {listing.location}, {listing.country}</p> */}
                 <p>Preferences: {listing.preferences}</p>
                 <p className="listing-posted">
                   Posted by: {listing.postedBy} on {listing.createdAt ? new Date(listing.createdAt).toLocaleDateString() : new Date().toLocaleDateString()}
