@@ -1,14 +1,15 @@
 // server/models/product.js
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const productDetailsSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema({
   title: { type: String, required: true },
   size: { type: String, required: true },
   condition: { type: String, required: true },
-  preferences: { type: [String], required: true },
-  imageData: { type: Buffer, required: true },  // Storing image data directly
-  imageMimeType: { type: String, required: true },  // Storing MIME type
-  postedDate: { type: Date, default: Date.now }, // Keeping this for backward compatibility
+  preferences: { type: Array, required: true },
+  imageData: { type: Buffer, required: true },
+  imageMimeType: { type: String, required: true },
+  username: { type: String, required: true }, // Added username field
+  postedDate: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model('ProductDetails', productDetailsSchema);
+module.exports = mongoose.model("ProductDetails", productSchema);

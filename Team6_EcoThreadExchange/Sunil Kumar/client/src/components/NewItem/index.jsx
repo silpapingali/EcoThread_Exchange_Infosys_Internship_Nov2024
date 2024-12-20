@@ -1,33 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styles from './styles.module.css';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./styles.module.css";
 
 const NewItem = ({ onNewItemAdded }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    title: '',
-    size: '',
-    condition: '',
+    title: "",
+    size: "",
+    condition: "",
   });
   const [image, setImage] = useState(null);
   const [preferences, setPreferences] = useState([]);
-  const [newPreference, setNewPreference] = useState('');
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    // Fetch the logged-in user information
-    const fetchUser = async () => {
-      try {
-        const response = await fetch('http://localhost:8080/api/current-user'); // Endpoint for current user
-        const userData = await response.json();
-        setUser(userData);
-      } catch (error) {
-        console.error('Error fetching user:', error);
-      }
-    };
-
-    fetchUser();
-  }, []);
+  const [newPreference, setNewPreference] = useState("");
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -42,7 +26,7 @@ const NewItem = ({ onNewItemAdded }) => {
   const handleAddPreference = () => {
     if (newPreference.trim()) {
       setPreferences([...preferences, newPreference.trim()]);
-      setNewPreference('');
+      setNewPreference("");
     }
   };
 
@@ -53,42 +37,54 @@ const NewItem = ({ onNewItemAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formDataToSend = new FormData();
-    formDataToSend.append('title', formData.title);
-    formDataToSend.append('size', formData.size);
-    formDataToSend.append('condition', formData.condition);
-    formDataToSend.append('preferences', JSON.stringify(preferences));
-    formDataToSend.append('image', image);
-    formDataToSend.append('userId', user?._id);
-  
+    formDataToSend.append("title", formData.title);
+    formDataToSend.append("size", formData.size);
+    formDataToSend.append("condition", formData.condition);
+    formDataToSend.append("preferences", JSON.stringify(preferences));
+    formDataToSend.append("image", image);
+
     try {
-      const response = await fetch('http://localhost:8080/api/products', {
-        method: 'POST',
+      const token = localStorage.getItem("token"); // Retrieve token from localStorage
+      if (!token) {
+        alert("Please login to add a product.");
+        return;
+      }
+
+      const response = await fetch("http://localhost:8080/api/products", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`, // Include token for authentication
+        },
         body: formDataToSend,
       });
-  
+
       if (response.ok) {
-        alert('Product added successfully!');
-        setFormData({ title: '', size: '', condition: '' });
+        alert("Product added successfully!");
+        setFormData({ title: "", size: "", condition: "" });
         setPreferences([]);
         setImage(null);
-        document.querySelector("input[type='file']").value = '';
-        onNewItemAdded();
-        navigate('/items');
+        document.querySelector("input[type='file']").value = "";
+        
+        // Validate if onNewItemAdded is a function before calling it
+        if (typeof onNewItemAdded === "function") {
+          onNewItemAdded();
+        }
+
+        navigate("/items");
       } else {
         const errorData = await response.json();
-        alert(errorData.message || 'An error occurred while adding the product.');
+        alert(errorData.message || "An error occurred while adding the product.");
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
-  
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <h2>New Item</h2>
-        <button onClick={() => navigate('/items')} className={styles.backButton}>
+        <button onClick={() => navigate("/items")} className={styles.backButton}>
           Go Back
         </button>
       </div>
@@ -147,6 +143,7 @@ const NewItem = ({ onNewItemAdded }) => {
                 accept="image/*"
                 onChange={handleImageChange}
                 className={styles.fileInput}
+                required
               />
             </div>
 
