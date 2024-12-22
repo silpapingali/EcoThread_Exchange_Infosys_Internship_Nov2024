@@ -10,8 +10,6 @@ const EditItem = ({ onUpdate }) => {
         title: '',
         description: '',
         price: '',
-        // country: '',
-        // location: '',
         preferences: '',
         size: '',
     });
@@ -46,7 +44,7 @@ const EditItem = ({ onUpdate }) => {
     };
 
     const handleCancel = () => {
-        navigate('/');
+        navigate('/myitem');
     };
 
     return (
@@ -62,11 +60,6 @@ const EditItem = ({ onUpdate }) => {
                 <label htmlFor="price">Price</label>
                 <input id="price" name="price" value={formData.price} onChange={handleChange} type="number" required />
 
-                {/* <label htmlFor="country">Country</label>
-                <input id="country" name="country" value={formData.country} onChange={handleChange} type="text" required />
-
-                <label htmlFor="location">Location</label>
-                <input id="location" name="location" value={formData.location} onChange={handleChange} type="text" required /> */}
 
                 <label htmlFor="preferences">Preferences</label>
                 <input id="preferences" name="preferences" value={formData.preferences} onChange={handleChange} type="text" required />

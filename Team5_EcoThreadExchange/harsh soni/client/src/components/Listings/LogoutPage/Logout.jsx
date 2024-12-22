@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import './Logout.css'; 
+import Navbar from "../Navbar/Navbar";
 
 const Logout = () => {
     const navigate = useNavigate();
@@ -15,6 +16,7 @@ const Logout = () => {
 
     return (
         <div className="logout-container">
+            <Navbar />
             <h1>Logout Page</h1>
            
             <p>Are you sure you want to log out?</p>

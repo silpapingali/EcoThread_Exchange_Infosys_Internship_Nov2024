@@ -1,20 +1,20 @@
-.public-listings {
+.public-listings3 {
   display: flex;
   flex-direction: column;
   margin-top: 100px;
 }
 
-.search-section {
+.search-section3 {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
 }
 
-.content-container {
+.content-container3 {
   display: flex;
 }
 
-.filter-container {
+.filter-container3 {
   flex: 1;
   max-width: 300px;
   padding: 20px;
@@ -24,7 +24,7 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.listings-container {
+.listings-container3 {
   flex: 3;
   display: flex;
   flex-wrap: wrap;
@@ -33,7 +33,7 @@
   background-color: #f0f0f0;
 }
 
-.listing-card {
+.listing-card3 {
   background-color: #ffffff;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -41,53 +41,54 @@
   margin: 10px;
   padding: 15px;
   width: 300px;
+  height: 500px;
   transition: transform 0.2s;
 }
 
-.listing-card:hover {
+.listing-card3:hover {
   transform: scale(1.05);
 }
 
-.listing-image {
+.listing-image3 {
   width: 100%;
   height: 65%;
   border-radius: 8px;
 }
 
-.listing-details {
+.listing-details3 {
   margin-top: 10px;
 }
 
-.listing-details h4 {
+.listing-details3 h4 {
   margin: 0;
   color: #333;
 }
 
-.listing-details p {
+.listing-details3 p {
   margin: 5px 0;
   color: #666;
 }
 
-.filter {
+.filter3 {
   margin-bottom: 15px;
 }
 
-.filter label {
+.filter3 label {
   font-weight: bold;
 }
 
-.filter input[type="range"] {
+.filter3 input[type="range"] {
   width: 100%;
 }
 
-.search-section input {
+.search-section3 input {
   padding: 10px;
   margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.search-section button {
+.search-section3 button {
   padding: 10px 15px;
   background-color: #4db6c2;
   color: white;
@@ -96,6 +97,28 @@
   cursor: pointer;
 }
 
-.search-section button:hover {
+.search-section3 button:hover {
+  background-color: #3a9a9f;
+}
+
+.button-container3 {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 5px;
+  padding-right: 100px;
+}
+
+.view-button3 {
+  padding: 10px 15px;
+  background-color: #4db6c2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.view-button3:hover {
   background-color: #3a9a9f;
 }

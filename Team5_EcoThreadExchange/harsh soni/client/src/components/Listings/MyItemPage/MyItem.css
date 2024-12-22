@@ -1,0 +1,161 @@
+.public-listings1 {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+}
+
+.search-section1 {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-section1 input {
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 300px;
+  transition: border-color 0.3s;
+}
+
+.search-section1 input:focus {
+  border-color: #4db6c2;
+  outline: none;
+}
+
+.search-section1 button {
+  padding: 10px 15px;
+  background-color: #4db6c2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-section1 button:hover {
+  background-color: #3a9a9f;
+}
+
+.content-container1 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  
+}
+
+.filter-container {
+  flex: 1;
+  max-width: 300px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+ 
+}
+
+.listings-container1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f0f0f0;
+  
+}
+
+.myitem-listing-card1 {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 10px 0;
+  padding: 15px;
+  max-width: 950px;
+  height: 230px;
+  width: 100%;
+}
+
+.listing-image1 {
+  width: 200px;
+  height: 100%;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+.listing-details1 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.listing-details1 h4 {
+  margin: 0;
+  color: #333;
+  font-size: 22px;
+}
+
+.listing-details1 p {
+  margin: 5px 0;
+  color: #666;
+  text-align: left;
+}
+
+.filter {
+  margin-bottom: 15px;
+}
+
+.filter label {
+  font-weight: bold;
+}
+
+.myitem-heading {
+  text-align: center;
+  color: #333;
+  font-size: 44px;
+  font-weight: bold;
+  margin-top: -10px;
+ 
+}
+
+.button-container   {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1px
+}
+
+.create-item-button {
+  padding: 10px 15px;
+  background-color: #4db6c2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.create-item-button:hover {
+  background-color: #3a9a9f;
+}
+
+.edit-button {
+  padding: 10px 15px;
+  
+  background-color: #4db6c2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s;
+;
+}
+
+.edit-button:hover {
+  background-color: #3a9a9f;
+}

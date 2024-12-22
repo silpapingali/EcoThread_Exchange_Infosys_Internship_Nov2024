@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import EditItem from './EditItem'; // Import EditItem component
-import './ViewItem.css'; // Import the CSS file
+import EditItem from '../EditItemPage/EditItem'; 
+import './ViewItem.css'; 
 
 const ViewItem = () => {
   const { id } = useParams();
@@ -32,12 +32,11 @@ const ViewItem = () => {
         <p>Size: {item.size}</p>
         <p>Description: {item.description}</p>
         <p>Price: &#8377; {item.price.toLocaleString("en-IN")}</p>
-        {/* <p>Location: {item.location}, {item.country}</p> */}
-        {/* <p>Condition: {item.condition}</p> */}
         <p>Preferences: {item.preferences}</p>
         <p>Posted by: {item.postedBy} on {item.createdAt ? new Date(item.createdAt).toLocaleDateString() : new Date().toLocaleDateString()}</p>
-        <button className="trade-button">Trade</button>
-        <button className="go-back-button" onClick={() => navigate('/listings')}>Go Back</button>
+        
+        <Link to={`/trades/${item._id}`} className="trade-button">Trade</Link>
+        <button className="go-back-button" onClick={() => navigate('/')}>Go Back</button>
       </div>
       {isEditing && <EditItem item={item} onUpdate={() => setIsEditing(false)} />}
     </div>
