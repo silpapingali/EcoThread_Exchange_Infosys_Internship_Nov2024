@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Navbar from '../Navbar/Navbar'; 
-import './PublicListings.css'; 
+import Navbar from "../Navbar/Navbar"; // Correct path to Navbar component
+
+import './MyItem.css'; 
 import { Link } from 'react-router-dom'; 
-const PublicListings = () => {
+
+const MyItem = () => {
   const [listings, setListings] = useState([]);
   const [filteredListings, setFilteredListings] = useState([]);
-  const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(10000); 
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
@@ -31,18 +31,14 @@ const PublicListings = () => {
     setFilteredListings(filtered); 
   };
 
-  const handlePriceFilter = () => {
-    const filtered = listings.filter((listing) => {
-      const price = listing.price; 
-      return price >= minPrice && price <= maxPrice;
-    });
-    setFilteredListings(filtered);
-  };
-
   return (
-    <div className="public-listings">
+    <div className="public-listings1">
       <Navbar onSearch={handleSearch} /> 
-      <div className="search-section">
+      <h1 className="myitem-heading">My Item</h1>
+      <div className="button-container">
+        <Link to="/listings/new" className="create-item-button">Create New Item</Link>
+      </div>
+      <div className="search-section1">
         <input
           type="text"
           placeholder="Search items..."
@@ -52,48 +48,26 @@ const PublicListings = () => {
         />
         <button onClick={handleSearch}>Search</button>
       </div>
-      <div className="content-container">
-        <div className="filter-container">
-          <h2>Filters</h2>
-          {/* <div className="filter">
-            <label>Exact Match</label>
-            <input type="checkbox" />
-          </div> */}
-          <div className="filter">
-            <label>Trades greater than</label>
-            <input
-              type="range"
-              min="0"
-              max="10000"
-              value={minPrice}
-              onChange={(e) => setMinPrice(e.target.value)}
-              onMouseUp={handlePriceFilter}
-            />
-            <span>{minPrice}</span>
-          </div>
-          <div className="filter">
-            <label>Posted After</label>
-            <input type="date" />
-          </div>
-        </div>
-        <div className="listings-container">
+      <div className="content-container1">
+        <div className="listings-container1">
           {filteredListings.map((listing) => (
-            <div className="listing-card" key={listing._id}>
+            <div className="myitem-listing-card1" key={listing._id}>
               <img 
                 src={`http://localhost:8080/${listing.image}`} 
                 alt={listing.title} 
-                className="listing-image" 
+                className="listing-image1" 
               />
-              <div className="listing-details">
+              <div className="listing-details1">
                 <h4>{listing.title}</h4>
                 <p>Size: {listing.size}</p>
                 <p>Price: &#8377; {listing.price.toLocaleString("en-IN")}</p>
-                {/* <p>Location: {listing.location}, {listing.country}</p> */}
                 <p>Preferences: {listing.preferences}</p>
-                <p className="listing-posted">
+                <p className="listing-posted1">
                   Posted by: {listing.postedBy} on {listing.createdAt ? new Date(listing.createdAt).toLocaleDateString() : new Date().toLocaleDateString()}
                 </p>
-                <Link to={`/listings/${listing._id}`}>View</Link>
+                <div className="button-container">
+                  <Link to={`/listings/${listing._id}/edit`} className="edit-button">Edit</Link>
+                </div>
               </div>
             </div>
           ))}
@@ -103,4 +77,4 @@ const PublicListings = () => {
   );
 };
 
-export default PublicListings;
+export default MyItem;

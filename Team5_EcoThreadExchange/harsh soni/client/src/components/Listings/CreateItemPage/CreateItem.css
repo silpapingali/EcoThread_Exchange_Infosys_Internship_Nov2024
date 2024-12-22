@@ -32,6 +32,7 @@
 
 .create-item-container button {
     padding: 10px;
+    margin-left: 10px;
     border: none;
     border-radius: 4px;
     background-color:  #4db6c2; 

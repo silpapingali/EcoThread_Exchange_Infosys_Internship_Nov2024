@@ -17,7 +17,7 @@ userSchema.methods.generateAuthToken = function () {
     { _id: this._id, role: this.role }, // Include role in token
     process.env.JWTPRIVATEKEY,
     { expiresIn: "7d" }
-  );
+  );  
   return token;
 };
 

@@ -7,8 +7,6 @@ const CreateItem = () => {
         title: '',
         description: '',
         price: '',
-        // country: '',
-        // location: '',
         preferences: '',
         size: '',
         image: null, 
@@ -19,6 +17,9 @@ const CreateItem = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+    };
+    const handleCancel = () => {
+        navigate('/myitem');
     };
 
     const handleImageChange = (e) => {
@@ -61,11 +62,6 @@ const CreateItem = () => {
                 <label htmlFor="price">Price</label>
                 <input id="price" name="price" value={formData.price} onChange={handleChange} type="number" required />
 
-                {/* <label htmlFor="country">Country</label>
-                <input id="country" name="country" value={formData.country} onChange={handleChange} type="text" required />
-
-                <label htmlFor="location">Location</label>
-                <input id="location" name="location" value={formData.location} onChange={handleChange} type="text" required /> */}
 
                 <label htmlFor="preferences">Preferences</label>
                 <input id="preferences" name="preferences" value={formData.preferences} onChange={handleChange} type="text" required />
@@ -77,6 +73,8 @@ const CreateItem = () => {
                 <input id="image" name="image" type="file" accept="image/*" onChange={handleImageChange} /> {/* Image upload input */}
 
                 <button type="submit">Create Item</button>
+                
+                <button type="button" onClick={handleCancel}>Cancel</button>
             </form>
         </div>
     );

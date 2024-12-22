@@ -1,0 +1,91 @@
+.index-listings2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.listing-card2 {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 15px;
+    width: 300px; 
+    height: 500px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.listing-card2:hover {
+    transform: scale(1.05);
+}
+
+.listing-image2 {
+    width: 100%;
+    height: 62%;
+    border-radius: 4px;
+}
+
+.listing-details2 {
+    margin-top: 10px;
+}
+
+.listing-title2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.listing-price2 {
+    color: #4caf50;
+    font-size: 16px;
+}
+
+.listing-size2,
+.listing-preferences2 {
+    font-size: 14px;
+    color: #777;
+}
+
+.button-container2 {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.my-items-button2 {
+    padding: 10px 15px;
+    background-color: #4db6c2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.my-items-button2:hover {
+    background-color: #3a9a9f;
+}
+
+.view-link2 {
+    padding: 8px 12px;
+    background-color: #4db6c2;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.view-link2:hover {
+    background-color: #3a9a9f;
+}
+.recommended-heading2{
+    margin-top: 100px;
+    margin-left: 60px;
+    font-size: 34px;
+    margin-bottom: -40px;
+}
