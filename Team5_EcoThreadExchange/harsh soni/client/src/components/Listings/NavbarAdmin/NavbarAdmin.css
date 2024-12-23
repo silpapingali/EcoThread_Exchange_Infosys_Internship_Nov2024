@@ -1,0 +1,39 @@
+.navbar-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4db6c2;
+    padding: 10px; 
+    width: 100%; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    z-index: 1000; 
+}
+  
+.navbar-brand {
+    font-size: 24px;
+    color: #f9e79f; 
+    font-weight: bold;
+}
+  
+.navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 25px; 
+    padding-right: 60px;
+}
+  
+.navbar-links li {
+    display: inline;
+}
+  
+.navbar-links a {
+    text-decoration: none;
+    color: #f9e79f; 
+    font-size: 18px;
+}
+  
+.navbar-links a:hover {
+    text-decoration: underline;
+} 

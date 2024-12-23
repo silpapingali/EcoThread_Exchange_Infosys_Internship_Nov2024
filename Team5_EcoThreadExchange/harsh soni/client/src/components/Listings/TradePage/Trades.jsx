@@ -10,6 +10,7 @@ const Trades = () => {
   const [allItems, setAllItems] = useState([]); // State to hold all items
   const [error, setError] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0); // State to track the current image index
+  const [isPending, setIsPending] = useState(false); // State to track proposal status
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -45,6 +46,10 @@ const Trades = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + allItems.length) % allItems.length);
   };
 
+  const handlePropose = () => {
+    setIsPending((prev) => !prev); // Toggle pending state
+  };
+
   if (!item) return <div>Loading...</div>;
   
 
@@ -63,8 +68,8 @@ const Trades = () => {
                 <p>Size: {item.size}</p>
                 <p>Description: {item.description}</p>
                 <p>Preferences: {item.preferences}</p>
-                <p>Price: &#8377; {item.price.toLocaleString("en-IN")}</p>
-                <p>Posted by: {item.postedBy} on {item.createdAt ? new Date(item.createdAt).toLocaleDateString() : new Date().toLocaleDateString()}</p>
+          
+                
               </div>
             </>
           ) : (
@@ -77,23 +82,38 @@ const Trades = () => {
         </div>
 
         <div className="trade-item">
-          <h3>All Items</h3>
-          <div className="all-items-container">
-            {allItems.length > 0 && (
+          {allItems.length > 0 && (
+            <>
               <img 
                 src={`http://localhost:8080/${allItems[currentIndex].image}`} 
                 alt={allItems[currentIndex].title} 
                 className="trade-item-image" 
               />
-            )}
-          </div>
-          <div className="trade-arrows">
-            <span className="arrow" onClick={handlePrev}>&#8592;</span> {/* Left arrow */}
-            <span className="arrow" onClick={handleNext}>&#8594;</span> {/* Right arrow */}
-          </div>
+              <div className="trade-item-details">
+                <h3>{allItems[currentIndex].title}</h3>
+                <p>Size: {allItems[currentIndex].size}</p>
+                <p>Description: {allItems[currentIndex].description}</p>
+                <p>Preferences: {allItems[currentIndex].preferences}</p>
+                
+                
+              </div>
+              <div className="trade-arrows">
+        <span className="arrow" onClick={handlePrev}>&#8592;</span> {/* Left arrow */}
+        <span className="arrow" onClick={handleNext}>&#8594;</span> {/* Right arrow */}
+      </div>
+            </>
+          )}
         </div>
       </div>
-      <button className="propose-button">Propose</button>
+      
+      {isPending && <div className="pending-message">Pending...</div>}
+      
+      <button 
+        className={`propose-button ${isPending ? 'cancel-button' : ''}`} 
+        onClick={handlePropose}
+      >
+        {isPending ? "Cancel Trade" : "Propose"}
+      </button>
     </div>
   );
 };

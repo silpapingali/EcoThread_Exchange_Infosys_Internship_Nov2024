@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import NavbarAdmin from '../Listings/NavbarAdmin/NavbarAdmin';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
     const [items, setItems] = useState([]);
+    const [users, setUsers] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -16,7 +18,18 @@ const AdminDashboard = () => {
                 console.error("Error fetching items:", error);
             }
         };
+
+        const fetchUsers = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/api/users');
+                setUsers(response.data);
+            } catch (error) {
+                console.error("Error fetching users:", error);
+            }
+        };
+
         fetchItems();
+        fetchUsers();
     }, []);
 
     const handleDelete = async (id) => {
@@ -28,17 +41,22 @@ const AdminDashboard = () => {
         }
     };
 
-    const handleView = (id) => {
-        navigate(`/listings/${id}`);
+    const handleSuspendAccount = async (userId) => {
+        try {
+            await axios.put(`http://localhost:8080/api/users/${userId}/block`);
+            setUsers(users.map(user => user._id === userId ? { ...user, blocked: true } : user));
+        } catch (error) {
+            console.error("Error suspending account:", error);
+        }
     };
 
-    const handleTrade = (id) => {
-        // Implement trade logic here
-        alert(`Trade initiated for item ID: ${id}`);
+    const handleViewItem = (itemId) => {
+        navigate(`/admin/view-item/${itemId}`);
     };
 
     return (
         <div className="admin-dashboard">
+            <NavbarAdmin />
             <h1>Admin Dashboard</h1>
             <div className="item-list">
                 {items.map(item => (
@@ -48,11 +66,25 @@ const AdminDashboard = () => {
                             <h3>{item.title}</h3>
                             <p>Price: &#8377; {item.price.toLocaleString("en-IN")}</p>
                             <div className="item-actions">
-                                {/* <button onClick={() => handleView(item._id)}>View</button>
-                                <button onClick={() => handleTrade(item._id)}>Allow Trade</button> */}
-                                <button onClick={() => handleDelete(item._id)}>Delete</button>
-                                
+                                <button className="admin-button" onClick={() => handleDelete(item._id)}>BlockItem</button>
+                                <button className="admin-button" onClick={() => handleSuspendAccount(item.userId)}>Suspend Account</button>
+                               
                             </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            <h2>User Management</h2>
+            <div className="user-list">
+                {users.map(user => (
+                    <div className="user-card" key={user._id}>
+                        <p>Email: {user.email}</p>
+                        <div className="user-actions">
+                            {user.blocked ? (
+                                <p>User is blocked</p>
+                            ) : (
+                                <button className="admin-button" onClick={() => handleSuspendAccount(user._id)}>Suspend Account</button>
+                            )}
                         </div>
                     </div>
                 ))}

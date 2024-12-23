@@ -56,8 +56,21 @@
     gap: 10px;
 }
 
+.admin-button {
+    background-color: #4caf50; /* Green color */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.admin-button:hover {
+    background-color: #388e3c; /* Darker green on hover */
+}
 .item-actions button {
-    background-color: #4caf50;
+    background-color: #e60000; /* Red for delete button */
     color: white;
     border: none;
     padding: 5px 10px;
@@ -67,13 +80,5 @@
 }
 
 .item-actions button:hover {
-    background-color: #388e3c;
+    background-color: #ce0202; /* Darker red on hover */
 }
-
-.item-actions button:nth-child(3) {
-    background-color: #e60000; /* Green for trade button */
-}
-
-.item-actions button:nth-child(3):hover {
-    background-color:#ce0202 /* Darker green on hover */
-} 

@@ -57,4 +57,37 @@ router.get("/:id/verify/:token", async (req, res) => {
     res.status(500).send({ message: "Internal Server Error" });
   }
 });
+
+// Block a user
+router.put("/:id/block", async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, { blocked: true }, { new: true });
+    if (!user) return res.status(404).send({ message: "User not found" });
+    res.status(200).send({ message: "User blocked successfully", user });
+  } catch (error) {
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
+
+// Unblock a user
+router.put("/:id/unblock", async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, { blocked: false }, { new: true });
+    if (!user) return res.status(404).send({ message: "User not found" });
+    res.status(200).send({ message: "User unblocked successfully", user });
+  } catch (error) {
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
+
+// Get all users
+router.get("/", async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).send(users);
+  } catch (error) {
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
+
 module.exports = router;
