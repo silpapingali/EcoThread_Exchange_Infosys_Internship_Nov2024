@@ -1,0 +1,51 @@
+.edit-item {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.edit-item h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4db6c2;
+}
+
+.edit-item form {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-item input,
+.edit-item textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.edit-item button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+   background-color: #4db6c2;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.edit-item button:hover {
+    background-color: #0cc465;
+}
+
+.edit-item button[type="button"] {
+    background-color: #ed5a50; 
+}
+
+.edit-item button[type="button"]:hover {
+    background-color: #b1201e; 
+}

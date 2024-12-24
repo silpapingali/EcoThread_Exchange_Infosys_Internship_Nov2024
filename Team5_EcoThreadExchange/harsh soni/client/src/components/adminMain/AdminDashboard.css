@@ -1,0 +1,119 @@
+.admin-dashboard {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 20px;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:#4db6c2;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 8px;
+}
+
+.dashboard-header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.dashboard-header nav button {
+    background-color: white;
+    color: #4caf50;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.dashboard-header nav button:hover {
+    background-color: #388e3c;
+    color: white;
+}
+
+.filter-bar {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.filter-bar label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.item-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+}
+
+.item-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.item-details {
+    text-align: center;
+}
+
+.item-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.item-actions button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.item-actions button:hover {
+    background-color: #388e3c;
+}
+
+.item-actions button:nth-child(3) {
+    background-color: #e60000;
+}
+
+.item-actions button:nth-child(3):hover {
+    background-color: #b80000;
+}
+
+.dashboard-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+}

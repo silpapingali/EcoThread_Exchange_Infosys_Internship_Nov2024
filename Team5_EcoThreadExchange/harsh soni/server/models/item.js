@@ -8,6 +8,7 @@ const itemSchema = new mongoose.Schema({
   size: { type: String, required: true },
   image: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
+  deleted: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model("Item", itemSchema);

@@ -30,11 +30,9 @@ router.post("/", upload.single('image'), async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       price: req.body.price,
-      // country: req.body.country,
-      // location: req.body.location,
       preferences: req.body.preferences,
       size: req.body.size,
-      image: req.file.path.replace(/\\/g, '/'), // Replace backslashes with forward slashes
+      image: req.file.path.replace(/\\/g, '/'), 
     });
     await item.save();
     res.status(201).send(item);
@@ -43,10 +41,10 @@ router.post("/", upload.single('image'), async (req, res) => {
   }
 });
 
-// Get all items
+// Get all items (excluding deleted ones)
 router.get("/", async (req, res) => {
   try {
-    const items = await Item.find();
+    const items = await Item.find({ deleted: false });
     res.status(200).send(items);
   } catch (error) {
     res.status(500).send({ message: "Internal Server Error" });
@@ -73,8 +71,6 @@ router.put("/:id", upload.single('image'), async (req, res) => {
       title,
       description,
       price,
-      // country,
-      // location,
       preferences,
       size,
     }, { new: true });
@@ -106,6 +102,35 @@ router.get('/edit/:id', async (req, res) => {
   } catch (error) {
     res.status(500).send('Server error');
   }
+});
+
+router.get("/random", async (req, res) => {
+  try {
+    const count = await Item.countDocuments({ deleted: false });
+    if (count === 0) {
+      return res.status(404).send({ message: "No items available" });
+    }
+    const random = Math.floor(Math.random() * count);
+    const randomItem = await Item.findOne({ deleted: false }).skip(random);
+    res.status(200).send(randomItem);
+  } catch (error) {
+    console.error("Error fetching random item:", error);
+    res.status(500).send({ message: "Internal Server Error", error: error.message });
+  }
+});
+
+// Get all items (with optional search query)
+router.get("/", async (req, res) => {
+    try {
+        const searchQuery = req.query.search || '';
+        const items = await Item.find({
+            deleted: false,
+            title: { $regex: searchQuery, $options: 'i' } // Case-insensitive search
+        });
+        res.status(200).send(items);
+    } catch (error) {
+        res.status(500).send({ message: "Internal Server Error" });
+    }
 });
 
 module.exports = router;

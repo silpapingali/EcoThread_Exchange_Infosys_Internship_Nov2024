@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import Navbar from '../Navbar/Navbar'; 
-import IndexListings from "../Listings/IndexListings"; 
+import Navbar from '../Listings/Navbar/Navbar'; 
+import IndexListings from "../Listings/DashboardPage/IndexListings"; 
 import './UserHomePage.css'; 
 
 const UserHomePage = () => {
@@ -28,9 +28,7 @@ const UserHomePage = () => {
   return (
     <div>
       <Navbar /> 
-      <h1>User Home Page</h1>
-      <h2>Add a New Product</h2>
-      <button onClick={() => navigate('/listings/new')}>Create New Item</button> 
+      
 
       <IndexListings listings={items} /> 
     </div>
