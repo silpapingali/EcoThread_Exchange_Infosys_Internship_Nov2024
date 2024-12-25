@@ -1,10 +1,10 @@
-const router = require("express").Router();
+const express = require('express');
+const router = express.Router();
 const { User, validate } = require("../models/user");
 const bcrypt = require("bcrypt");
 const Token = require("../models/token");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
-
 
 router.post("/", async (req, res) => {
   try {
@@ -23,10 +23,12 @@ router.post("/", async (req, res) => {
 
     user = await new User({ ...req.body, password: hashPassword }).save();
 
+    console.log("Attempting to create token for user:", user._id);
     const token = await new Token({
       userId: user._id,
       token: crypto.randomBytes(32).toString("hex"),
     }).save();
+    console.log("Token created:", token);
 
     const url = `${process.env.BASE_URL}users/${user._id}/verify/${token.token}`;
     await sendEmail(user.email, "Verify Email", url);
@@ -80,13 +82,13 @@ router.put("/:id/unblock", async (req, res) => {
   }
 });
 
-// Get all users
-router.get("/", async (req, res) => {
+// GET all users
+router.get('/', async (req, res) => {
   try {
-    const users = await User.find();
-    res.status(200).send(users);
+    const users = await User.find(); // Fetch all users from the database
+    res.json(users);
   } catch (error) {
-    res.status(500).send({ message: "Internal Server Error" });
+    res.status(500).json({ message: 'Error fetching users' });
   }
 });
 

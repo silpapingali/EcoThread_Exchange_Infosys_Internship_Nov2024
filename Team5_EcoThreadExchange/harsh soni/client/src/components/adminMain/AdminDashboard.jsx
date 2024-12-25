@@ -13,6 +13,7 @@ const AdminDashboard = () => {
         const fetchItems = async () => {
             try {
                 const response = await axios.get('http://localhost:8080/api/items');
+                console.log("Fetched Items:", response.data);
                 setItems(response.data);
             } catch (error) {
                 console.error("Error fetching items:", error);
@@ -22,6 +23,7 @@ const AdminDashboard = () => {
         const fetchUsers = async () => {
             try {
                 const response = await axios.get('http://localhost:8080/api/users');
+                console.log("Fetched Users:", response.data);
                 setUsers(response.data);
             } catch (error) {
                 console.error("Error fetching users:", error);
@@ -42,48 +44,74 @@ const AdminDashboard = () => {
     };
 
     const handleSuspendAccount = async (userId) => {
-        try {
-            await axios.put(`http://localhost:8080/api/users/${userId}/block`);
-            setUsers(users.map(user => user._id === userId ? { ...user, blocked: true } : user));
-        } catch (error) {
-            console.error("Error suspending account:", error);
+        const user = users.find(user => user._id === userId);
+        if (user) {
+            try {
+                await axios.put(`http://localhost:8080/api/users/${user._id}/block`);
+                setUsers(users.map(u => u._id === user._id ? { ...u, blocked: true } : u));
+            } catch (error) {
+                console.error("Error suspending account:", error);
+            }
+        } else {
+            console.error("User not found with ID:", userId);
         }
     };
 
-    const handleViewItem = (itemId) => {
-        navigate(`/admin/view-item/${itemId}`);
-    };
+    // Create a mapping of user IDs for quick access
+    const userMap = Object.fromEntries(users.map(user => [user._id, user]));
 
     return (
         <div className="admin-dashboard">
             <NavbarAdmin />
             <h1>Admin Dashboard</h1>
             <div className="item-list">
-                {items.map(item => (
-                    <div className="item-card" key={item._id}>
-                        <img src={`http://localhost:8080/${item.image}`} alt={item.title} className="item-image" />
-                        <div className="item-details">
-                            <h3>{item.title}</h3>
-                            <p>Price: &#8377; {item.price.toLocaleString("en-IN")}</p>
-                            <div className="item-actions">
-                                <button className="admin-button" onClick={() => handleDelete(item._id)}>BlockItem</button>
-                                <button className="admin-button" onClick={() => handleSuspendAccount(item.userId)}>Suspend Account</button>
-                               
+                {items.map(item => {
+                    const user = userMap[item.userId]; // Use the mapping to find the user
+
+                    return (
+                        <div className="item-card" key={item._id}>
+                            <img src={`http://localhost:8080/${item.image}`} alt={item.title} className="item-image" />
+                            <div className="item-details">
+                                <h3>{item.title}</h3>
+                                <p>Price: &#8377; {item.price.toLocaleString("en-IN")}</p>
+                                <div className="item-actions">
+                                    <button className="admin-button" onClick={() => handleDelete(item._id)}>Delete</button>
+                                    {user ? (
+                                        <div className="user-card">
+                                            <p>Email: {user.email}</p>
+                                            <p>User ID: {user._id}</p>
+                                            <div className="user-actions">
+                                                {user.blocked ? (
+                                                    <p>User is blocked</p>
+                                                ) : (
+                                                    <button className="admin-button" onClick={() => handleSuspendAccount(user._id)}>
+                                                        Suspend Account
+                                                    </button>
+                                                )}
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <p>User not found</p>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
             <h2>User Management</h2>
             <div className="user-list">
                 {users.map(user => (
                     <div className="user-card" key={user._id}>
                         <p>Email: {user.email}</p>
+                        <p>User ID: {user._id}</p>
                         <div className="user-actions">
                             {user.blocked ? (
                                 <p>User is blocked</p>
                             ) : (
-                                <button className="admin-button" onClick={() => handleSuspendAccount(user._id)}>Suspend Account</button>
+                                <button className="admin-button" onClick={() => handleSuspendAccount(user._id)}>
+                                    Suspend Account
+                                </button>
                             )}
                         </div>
                     </div>

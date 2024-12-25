@@ -10,6 +10,7 @@ if (!fs.existsSync(uploadsDir)) {
 const router = require("express").Router();
 const Item = require("../models/item");
 const multer = require("multer");
+const auth = require("../middleware/auth");
 
 // Set up multer for file uploads
 const storage = multer.diskStorage({
@@ -24,7 +25,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Create a new item
-router.post("/", upload.single('image'), async (req, res) => {
+router.post("/", auth, upload.single('image'), async (req, res) => {
   try {
     const item = new Item({
       title: req.body.title,
@@ -33,6 +34,7 @@ router.post("/", upload.single('image'), async (req, res) => {
       preferences: req.body.preferences,
       size: req.body.size,
       image: req.file.path.replace(/\\/g, '/'), 
+      userId: req.user._id,
     });
     await item.save();
     res.status(201).send(item);

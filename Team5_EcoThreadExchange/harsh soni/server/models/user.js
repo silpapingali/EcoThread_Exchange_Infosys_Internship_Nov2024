@@ -15,14 +15,14 @@ const userSchema = new mongoose.Schema({
 
 userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
-    { _id: this._id, role: this.role },
+    { _id: this._id, role: this.role }, // Include role in token
     process.env.JWTPRIVATEKEY,
     { expiresIn: "7d" }
   );  
   return token;
 };
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("user", userSchema);
 
 const validate = (data) => {
   const schema = Joi.object({

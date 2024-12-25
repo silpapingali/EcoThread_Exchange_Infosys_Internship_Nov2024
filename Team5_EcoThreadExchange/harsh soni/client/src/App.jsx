@@ -14,9 +14,7 @@ import AdminDashboard from './components/adminMain/AdminDashboard';
 import MyItem from './components/Listings/MyItemPage/MyItem';
 import UserDetailAdminPage from './components/adminMain/UserDetailAdminPage/UserDetailAdminPage';
 
-
-
-
+import AfterTradesComponent from './components/Listings/AfterTradesPage/AfterTradesComponent';
 
 const App = () => {
     const token = localStorage.getItem("token");
@@ -49,7 +47,8 @@ const App = () => {
                 <Route path="/create-item" element={<CreateItem />} />
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/admin/user" element={<UserDetailAdminPage />} />
-             
+                
+                <Route path="/after-trades" element={<AfterTradesComponent />} />
 
                 <Route path="*" element={<Navigate replace to="/" />} />
             </Routes>
