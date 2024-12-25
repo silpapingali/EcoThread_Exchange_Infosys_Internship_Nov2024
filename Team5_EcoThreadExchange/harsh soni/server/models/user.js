@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   verified: { type: Boolean, default: false },
-  role: { type: String, required: true, default: "user" }, // Role field added
+  role: { type: String, required: true, default: "user" },
+  blocked: { type: Boolean, default: false },
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -29,7 +30,7 @@ const validate = (data) => {
     lastName: Joi.string().required().label("Last Name"),
     email: Joi.string().email().required().label("Email"),
     password: passwordComplexity().required().label("Password"),
-    role: Joi.string().valid("admin", "user").required().label("Role"), // Validate role
+    role: Joi.string().valid("admin", "user").required().label("Role"),
   });
   return schema.validate(data);
 };

@@ -9,6 +9,7 @@ const itemSchema = new mongoose.Schema({
   image: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
   deleted: { type: Boolean, default: false },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },
 });
 
 module.exports = mongoose.model("Item", itemSchema);

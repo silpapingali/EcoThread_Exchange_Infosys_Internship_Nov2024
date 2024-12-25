@@ -13,9 +13,16 @@ const MyItem = () => {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/items');
-        setListings(response.data);
-        setFilteredListings(response.data); 
+        const token = localStorage.getItem("token");
+        const response = await axios.get('http://localhost:8080/api/items', {
+          headers: {
+            'x-auth-token': token, // Include token for authentication
+          },
+        });
+        const userId = JSON.parse(atob(token.split('.')[1]))._id; // Decode token to get user ID
+        const userItems = response.data.filter(item => item.userId === userId); // Filter items by user ID
+        setListings(userItems);
+        setFilteredListings(userItems); 
       } catch (error) {
         console.error("Error fetching listings:", error);
       }
