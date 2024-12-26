@@ -1,4 +1,4 @@
-/* Container Styling */
+
 .container {
     width: 100vw;
     height: 100vh;
@@ -10,14 +10,14 @@
     font-family: Arial, sans-serif;
 }
 
-/* Success Image Styling */
+
 .success_img {
     width: 100px;
     height: 100px;
     margin-bottom: 20px;
 }
 
-/* Button Styling */
+
 .green_btn {
     border: none;
     outline: none;

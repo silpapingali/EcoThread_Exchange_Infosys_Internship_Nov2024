@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// Ensure the uploads directory exists
+
 const uploadsDir = path.join(__dirname, '../uploads');
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir);
@@ -12,19 +12,18 @@ const Item = require("../models/item");
 const multer = require("multer");
 const auth = require("../middleware/auth");
 
-// Set up multer for file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // Directory to save uploaded files
+    cb(null, 'uploads/'); 
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)); // Append timestamp to file name
+    cb(null, Date.now() + path.extname(file.originalname)); 
   }
 });
 
 const upload = multer({ storage: storage });
 
-// Create a new item
+
 router.post("/", auth, upload.single('image'), async (req, res) => {
   try {
     const item = new Item({
@@ -43,7 +42,7 @@ router.post("/", auth, upload.single('image'), async (req, res) => {
   }
 });
 
-// Get all items (excluding deleted ones)
+
 router.get("/", async (req, res) => {
   try {
     const items = await Item.find({ deleted: false });
@@ -53,7 +52,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Get item by ID
+
 router.get("/:id", async (req, res) => {
   try {
     const item = await Item.findById(req.params.id);
@@ -64,7 +63,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Update item by ID
 router.put("/:id", upload.single('image'), async (req, res) => {
   const { title, description, price, preferences, size } = req.body;
 
@@ -84,7 +82,7 @@ router.put("/:id", upload.single('image'), async (req, res) => {
   }
 });
 
-// Delete item by ID
+
 router.delete("/:id", async (req, res) => {
   try {
     const item = await Item.findByIdAndDelete(req.params.id);
@@ -95,7 +93,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// Route to get an item by ID
+
 router.get('/edit/:id', async (req, res) => {
   try {
     const item = await Item.findById(req.params.id);

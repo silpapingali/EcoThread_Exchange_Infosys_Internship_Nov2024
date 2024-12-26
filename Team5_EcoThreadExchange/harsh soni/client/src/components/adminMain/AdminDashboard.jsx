@@ -12,7 +12,7 @@ const AdminDashboard = () => {
     useEffect(() => {
         const fetchItems = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/items');
+                const response = await axios.get('http://localhost:8080/api/items?role=admin');
                 console.log("Fetched Items:", response.data);
                 setItems(response.data);
             } catch (error) {
@@ -37,9 +37,11 @@ const AdminDashboard = () => {
     const handleDelete = async (id) => {
         try {
             await axios.delete(`http://localhost:8080/api/items/${id}`);
-            setItems(items.filter(item => item._id !== id));
+            setItems(items.map(item =>
+                item._id === id ? { ...item, deleted: true } : item
+            ));
         } catch (error) {
-            console.error("Error deleting item:", error);
+            console.error("Error marking item as deleted:", error);
         }
     };
 
@@ -57,7 +59,6 @@ const AdminDashboard = () => {
         }
     };
 
-    // Create a mapping of user IDs for quick access
     const userMap = Object.fromEntries(users.map(user => [user._id, user]));
 
     return (
@@ -66,29 +67,36 @@ const AdminDashboard = () => {
             <h1>Admin Dashboard</h1>
             <div className="item-list">
                 {items.map(item => {
-                    const user = userMap[item.userId]; // Use the mapping to find the user
+                    const user = userMap[item.userId];
 
                     return (
-                        <div className="item-card" key={item._id}>
+                        <div className={`item-card ${item.deleted ? 'Suspended'  : ''}`} key={item._id}>
                             <img src={`http://localhost:8080/${item.image}`} alt={item.title} className="item-image" />
                             <div className="item-details">
-                                <h3>{item.title}</h3>
+                                <h3>{item.title} {item.deleted && '(Deleted)'}</h3>
+                                <p>Size: {item.size}</p>
+                                <p>Description: {item.description}</p>
                                 <p>Price: &#8377; {item.price.toLocaleString("en-IN")}</p>
+                                <p>Preferences: {item.preferences}</p>
                                 <div className="item-actions">
-                                    <button className="admin-button" onClick={() => handleDelete(item._id)}>Delete</button>
+                                    <button
+                                        className="delete-button"
+                                        onClick={() => handleDelete(item._id)}
+                                    >
+                                        {item.deleted ? 'Item is Suspend' : 'Block Item'}
+                                    </button>
                                     {user ? (
-                                        <div className="user-card">
-                                            <p>Email: {user.email}</p>
-                                            <p>User ID: {user._id}</p>
-                                            <div className="user-actions">
-                                                {user.blocked ? (
-                                                    <p>User is blocked</p>
-                                                ) : (
-                                                    <button className="admin-button" onClick={() => handleSuspendAccount(user._id)}>
-                                                        Suspend Account
-                                                    </button>
-                                                )}
-                                            </div>
+                                        <div className="user-actions">
+                                            {user.blocked ? (
+                                                <p className="suspend-info"><button>User is blocked</button></p>
+                                            ) : (
+                                                <button
+                                                    className="suspend-button"
+                                                    onClick={() => handleSuspendAccount(user._id)}
+                                                >
+                                                    Suspend Account
+                                                </button>
+                                            )}
                                         </div>
                                     ) : (
                                         <p>User not found</p>
@@ -99,26 +107,8 @@ const AdminDashboard = () => {
                     );
                 })}
             </div>
-            <h2>User Management</h2>
-            <div className="user-list">
-                {users.map(user => (
-                    <div className="user-card" key={user._id}>
-                        <p>Email: {user.email}</p>
-                        <p>User ID: {user._id}</p>
-                        <div className="user-actions">
-                            {user.blocked ? (
-                                <p>User is blocked</p>
-                            ) : (
-                                <button className="admin-button" onClick={() => handleSuspendAccount(user._id)}>
-                                    Suspend Account
-                                </button>
-                            )}
-                        </div>
-                    </div>
-                ))}
-            </div>
         </div>
     );
 };
 
-export default AdminDashboard; 
+export default AdminDashboard;

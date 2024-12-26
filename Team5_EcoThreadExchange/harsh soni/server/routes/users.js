@@ -48,9 +48,8 @@ router.get("/:id/verify/:token", async (req, res) => {
 
     const token = await Token.findOne({ userId: req.params.id, token: req.params.token });
     if (!token) return res.status(400).send("Invalid token.");
-    
-    // Remove the token after verification
-    await token.deleteOne(); // Updated
+
+    await token.deleteOne(); 
     
 
     res.status(200).send({ message: "Email verified successfully" });
@@ -60,7 +59,6 @@ router.get("/:id/verify/:token", async (req, res) => {
   }
 });
 
-// Block a user
 router.put("/:id/block", async (req, res) => {
   try {
     const user = await User.findByIdAndUpdate(req.params.id, { blocked: true }, { new: true });
@@ -71,7 +69,7 @@ router.put("/:id/block", async (req, res) => {
   }
 });
 
-// Unblock a user
+
 router.put("/:id/unblock", async (req, res) => {
   try {
     const user = await User.findByIdAndUpdate(req.params.id, { blocked: false }, { new: true });
@@ -82,10 +80,10 @@ router.put("/:id/unblock", async (req, res) => {
   }
 });
 
-// GET all users
+
 router.get('/', async (req, res) => {
   try {
-    const users = await User.find(); // Fetch all users from the database
+    const users = await User.find(); 
     res.json(users);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching users' });

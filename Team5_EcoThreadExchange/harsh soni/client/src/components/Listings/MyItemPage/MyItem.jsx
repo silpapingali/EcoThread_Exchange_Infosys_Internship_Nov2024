@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Navbar from "../Navbar/Navbar"; // Correct path to Navbar component
+import Navbar from "../Navbar/Navbar"; 
 
 import './MyItem.css'; 
 import { Link } from 'react-router-dom'; 
@@ -16,11 +16,11 @@ const MyItem = () => {
         const token = localStorage.getItem("token");
         const response = await axios.get('http://localhost:8080/api/items', {
           headers: {
-            'x-auth-token': token, // Include token for authentication
+            'x-auth-token': token, 
           },
         });
-        const userId = JSON.parse(atob(token.split('.')[1]))._id; // Decode token to get user ID
-        const userItems = response.data.filter(item => item.userId === userId); // Filter items by user ID
+        const userId = JSON.parse(atob(token.split('.')[1]))._id; 
+        const userItems = response.data.filter(item => item.userId === userId); 
         setListings(userItems);
         setFilteredListings(userItems); 
       } catch (error) {

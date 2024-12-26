@@ -18,7 +18,7 @@ connection();
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: "http://localhost:5173", // Allow requests from your frontend
+  origin: "http://localhost:5173", 
   credentials: true
 }));
 
@@ -30,7 +30,7 @@ app.use("/api/items", itemRoutes);
 app.use('/api/propose', proposeRoutes);
 app.use('/api/proposals', proposalRoutes);
 
-// Serve static files from the uploads directory
+
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Start the server
