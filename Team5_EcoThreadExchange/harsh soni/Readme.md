@@ -1,5 +1,5 @@
 DashboardPage
-![alt text](image.png)
+![alt text](client\Readme img\image-1.png)
 
 MyItemPage
 ![alt text](image-1.png)
