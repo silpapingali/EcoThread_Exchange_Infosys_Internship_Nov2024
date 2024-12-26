@@ -1,32 +1,34 @@
-DashboardPage
-![alt text](client\Readme img\image-1.png)
+## EcoThread Exchange Pages
 
-MyItemPage
-![alt text](image-1.png)
+### Dashboard Page
+![Dashboard Page](./client/Readme_img/image.png)
 
-CreateItemPage
-![alt text](image-2.png)
+### My Item Page
+![My Item Page](./client/Readme_img/image-1.png)
 
-EditItemPage
-![alt text](image-3.png)
+### Create Item Page
+![Create Item Page](./client/Readme_img/image-2.png)
 
-PublicItemPage
-![alt text](image-4.png)
+### Edit Item Page
+![Edit Item Page](./client/Readme_img/image-3.png)
 
-LogoutPage
-![alt text](image-5.png)
+### Public Item Page
+![Public Item Page](./client/Readme_img/image-4.png)
 
-ViewItemPage
-![alt text](image-6.png)
+### Logout Page
+![Logout Page](./client/Readme_img/image-5.png)
 
-TradePage
-![alt text](image-7.png)
+### View Item Page
+![View Item Page](./client/Readme_img/image-6.png)
 
-AfterTradespage
-![alt text](image-8.png)
+### Trade Page
+![Trade Page](./client/Readme_img/image-7.png)
 
-adminMain
-![alt text](image-9.png)
+### After Trades Page
+![After Trades Page](./client/Readme_img/image-8.png)
 
-UserDetailAdminpage
-![alt text](image-10.png)
+### Admin Main Page
+![Admin Main Page](./client/Readme_img/image-9.png)
+
+### User Detail Admin Page
+![User Detail Admin Page](./client/Readme_img/image-10.png)
