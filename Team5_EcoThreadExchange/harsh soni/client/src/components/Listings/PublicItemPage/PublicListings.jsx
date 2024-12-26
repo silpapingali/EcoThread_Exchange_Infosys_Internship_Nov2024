@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Navbar from "../Navbar/Navbar"; // Correct path to Navbar component
+import Navbar from "../Navbar/Navbar";
 import './PublicListings.css'; 
 import { Link } from 'react-router-dom'; 
 
@@ -10,20 +10,20 @@ const PublicListings = () => {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(10000); 
   const [searchTerm, setSearchTerm] = useState('');
-  const [userId, setUserId] = useState(null); // State to hold the current user's ID
+  const [userId, setUserId] = useState(null); 
 
   useEffect(() => {
     const fetchItems = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/items'); // Fetch all items
-            setListings(response.data); // Set all items for public view
-            setFilteredListings(response.data); // Initialize filtered listings
+            const response = await axios.get('http://localhost:8080/api/items'); 
+            setListings(response.data); 
+            setFilteredListings(response.data); 
 
-            // Get the user ID from the token
+          
             const token = localStorage.getItem("token");
             if (token) {
                 const decoded = JSON.parse(atob(token.split('.')[1]));
-                setUserId(decoded._id); // Set the current user's ID
+                setUserId(decoded._id); 
             }
         } catch (error) {
             console.error("Error fetching items:", error);
@@ -48,7 +48,7 @@ const PublicListings = () => {
     setFilteredListings(filtered);
   };
 
-  // Filter out the user's own items from the listings
+
   const visibleListings = filteredListings.filter(listing => listing.userId !== userId);
 
   return (

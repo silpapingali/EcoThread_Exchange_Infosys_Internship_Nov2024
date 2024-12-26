@@ -102,6 +102,7 @@
     display: flex;
     justify-content: center;
     margin-top: 20px;
+
     height: 300px;
 }
 
@@ -118,6 +119,7 @@
     margin: 0 10px;
     user-select: none;
     margin-top: -34px;
+  
 }
 
 .arrow:hover {

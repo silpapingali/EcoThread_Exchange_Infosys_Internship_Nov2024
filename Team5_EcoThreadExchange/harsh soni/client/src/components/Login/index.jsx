@@ -1,14 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "./login.css"; // Regular CSS import
+import "./login.css";
 
 const Login = () => {
     const [data, setData] = useState({ email: "", password: "" });
-    const [email, setEmail] = useState(""); // For forgot password form
+    const [email, setEmail] = useState(""); 
     const [error, setError] = useState("");
-    const [message, setMessage] = useState(""); // Success message for forgot password
-    const [isForgotPassword, setIsForgotPassword] = useState(false); // Toggle between login and forgot password forms
+    const [message, setMessage] = useState(""); 
+    const [isForgotPassword, setIsForgotPassword] = useState(false); 
 
     const handleChange = ({ currentTarget: input }) => {
         setData({ ...data, [input.name]: input.value });
@@ -24,7 +24,7 @@ const Login = () => {
             const url = "http://localhost:8080/api/auth";
             const { data: res } = await axios.post(url, data);
 
-            // Store token and role in local storage
+
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("role", res.data.role);
 
@@ -48,9 +48,9 @@ const Login = () => {
     const handleForgotSubmit = async (e) => {
         e.preventDefault();
         try {
-            const url = "http://localhost:8080/api/forgotpassword"; // Forgot password API endpoint
+            const url = "http://localhost:8080/api/forgotpassword";
             const { data } = await axios.post(url, { email });
-            setMessage(data.message); // Show success message
+            setMessage(data.message); 
             setError("");
         } catch (error) {
             if (
@@ -59,7 +59,7 @@ const Login = () => {
                 error.response.status <= 500
             ) {
                 setError(error.response.data.message);
-                setMessage(""); // Clear success message on error
+                setMessage(""); 
             }
         }
     };
@@ -68,7 +68,7 @@ const Login = () => {
         <div className="login_container">
             <div className="login_form_container">
                 <div className="left">
-                    {/* Toggle between Login and Forgot Password forms */}
+                  
                     {!isForgotPassword ? (
                         <form className="form_container" onSubmit={handleSubmit}>
                             <h1>Login</h1>
@@ -99,7 +99,7 @@ const Login = () => {
                                 <p
                                     className="forgot_link"
                                     onClick={() => {
-                                        setIsForgotPassword(true); // Switch to Forgot Password form
+                                        setIsForgotPassword(true); 
                                         setError("");
                                         setMessage("");
                                     }}
@@ -134,7 +134,7 @@ const Login = () => {
                                 <p
                                     className="back_to_login"
                                     onClick={() => {
-                                        setIsForgotPassword(false); // Switch back to Login form
+                                        setIsForgotPassword(false); 
                                         setError("");
                                         setMessage("");
                                     }}

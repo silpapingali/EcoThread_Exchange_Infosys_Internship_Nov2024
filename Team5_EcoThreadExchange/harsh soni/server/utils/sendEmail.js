@@ -5,16 +5,16 @@ module.exports = async (email, subject, text) => {
         const transporter = nodemailer.createTransport({
             host: process.env.HOST,
             service: process.env.SERVICE,
-            port: Number(process.env.EMAIL_PORT), // Ensure EMAIL_PORT is 587 for TLS
-            secure: process.env.SECURE === "true", // Convert 'true'/'false' string to boolean
+            port: Number(process.env.EMAIL_PORT), 
+            secure: process.env.SECURE === "true", 
             auth: {
                 user: "scam8079@gmail.com",
-                pass: "lgdo uftq ycnw tlii" , // Replace with App Password if using 2FA
+                pass: "lgdo uftq ycnw tlii" , 
             },
         });
 
         const mailOptions = {
-            from: `"EcoThread" <${process.env.USER}>`, // Optional, adds a name before the email
+            from: `"EcoThread" <${process.env.USER}>`, 
             to: email,
             subject: subject,
             text: text,

@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Navbar from "../Navbar/Navbar"; // Corrected path to Navbar component
+import Navbar from "../Navbar/Navbar"; 
 import './Trades.css';
 
 const Trades = () => {
   const { id } = useParams();
   const [item, setItem] = useState(null);
-  const [allItems, setAllItems] = useState([]); // State to hold all items
-  const [userItems, setUserItems] = useState([]); // State to hold user's items
+  const [userItems, setUserItems] = useState([]); 
   const [error, setError] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(0); // State to track the current image index
-  const [isPending, setIsPending] = useState(false); // State to track proposal status
+  const [selectedItem, setSelectedItem] = useState(null); 
+  const [currentIndex, setCurrentIndex] = useState(0); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,16 +21,6 @@ const Trades = () => {
       } catch (error) {
         setError("Error fetching item.");
         console.error("Error fetching item:", error);
-      }
-    };
-
-    const fetchAllItems = async () => {
-      try {
-        const response = await axios.get('http://localhost:8080/api/items'); // Fetch all items
-        setAllItems(response.data);
-      } catch (error) {
-        setError("Error fetching all items.");
-        console.error("Error fetching all items:", error);
       }
     };
 
@@ -51,9 +40,38 @@ const Trades = () => {
     };
 
     fetchItem();
-    fetchAllItems();
     fetchUserItems();
   }, [id]);
+
+  const handleSelectItem = (item) => {
+    setSelectedItem(item); // Set the selected item
+  };
+
+  const handlePropose = async () => {
+    if (selectedItem) {
+      try {
+        const token = localStorage.getItem("token");
+        const decoded = JSON.parse(atob(token.split('.')[1]));
+        const userId = decoded._id; // Get the current user's ID
+
+        const response = await axios.post(`http://localhost:8080/api/propose`, {
+          itemId: item._id, // ID of the item being proposed
+          proposedBy: userId, // ID of the user making the proposal
+          proposedTo: item.userId, // ID of the user who owns the item
+        });
+        console.log("Proposal sent:", response.data);
+        alert("Proposal sent successfully!");
+
+        // Navigate to AfterTradesComponent with the proposed item details and selected item
+        navigate('/after-trades', { state: { proposedItem: item, selectedItem: selectedItem } });
+      } catch (error) {
+        console.error("Error sending proposal:", error);
+        alert("Failed to send proposal. Please try again.");
+      }
+    } else {
+      alert("Please select an item to propose.");
+    }
+  };
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % userItems.length); // Loop to the start
@@ -61,29 +79,6 @@ const Trades = () => {
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + userItems.length) % userItems.length); // Loop to the end
-  };
-
-  const handlePropose = async () => {
-    setIsPending((prev) => !prev); // Toggle pending state
-
-    if (!isPending) {
-        try {
-            const token = localStorage.getItem("token");
-            const decoded = JSON.parse(atob(token.split('.')[1]));
-            const userId = decoded._id; // Get the current user's ID
-
-            const response = await axios.post(`http://localhost:8080/api/propose`, {
-                itemId: item._id, // ID of the item being proposed
-                proposedBy: userId, // ID of the user making the proposal
-                proposedTo: item.userId, // ID of the user who owns the item
-            });
-            console.log("Proposal sent:", response.data);
-            alert("Proposal sent successfully!");
-        } catch (error) {
-            console.error("Error sending proposal:", error);
-            alert("Failed to send proposal. Please try again.");
-        }
-    }
   };
 
   if (!item) return <div>Loading...</div>;
@@ -109,18 +104,22 @@ const Trades = () => {
             <p>Loading item...</p>
           )}
         </div>
-        
         <div className="arrow-container">
           <span className="arrow1">&#8596;</span>
         </div>
 
         <div className="trade-item">
           {userItems.length > 0 && (
-            <>
-              <img 
-                src={`http://localhost:8080/${userItems[currentIndex].image}`} 
-                alt={userItems[currentIndex].title} 
-                className="trade-item-image" 
+            <div>
+              <input
+                type="checkbox"
+                onChange={() => handleSelectItem(userItems[currentIndex])} // Select the current item
+                checked={selectedItem?._id === userItems[currentIndex]?._id} // Check if this item is selected
+              />
+              <img
+                src={`http://localhost:8080/${userItems[currentIndex].image}`}
+                alt={userItems[currentIndex].title}
+                className="trade-item-image"
               />
               <div className="trade-item-details">
                 <h3>{userItems[currentIndex].title}</h3>
@@ -128,22 +127,21 @@ const Trades = () => {
                 <p>Description: {userItems[currentIndex].description}</p>
                 <p>Preferences: {userItems[currentIndex].preferences}</p>
               </div>
-              <div className="trade-arrows">
-                <span className="arrow" onClick={handlePrev}>&#8592;</span> {/* Left arrow */}
-                <span className="arrow" onClick={handleNext}>&#8594;</span> {/* Right arrow */}
-              </div>
-            </>
+            </div>
           )}
         </div>
       </div>
-      
-      {isPending && <div className="pending-message">Pending...</div>}
-      
+
+      <div className="arrow-container">
+        <span className="arrow" onClick={handlePrev}>&#8592;</span> {/* Left arrow */}
+        <span className="arrow" onClick={handleNext}>&#8594;</span> {/* Right arrow */}
+      </div>
+
       <button 
-        className={`propose-button ${isPending ? 'cancel-button' : ''}`} 
+        className={`propose-button`} 
         onClick={handlePropose}
       >
-        {isPending ? "Cancel Trade" : "Propose"}
+        Propose
       </button>
     </div>
   );

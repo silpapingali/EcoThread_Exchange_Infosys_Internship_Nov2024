@@ -1,5 +1,5 @@
 .admin-dashboard {
-    padding: 20px;
+    padding: 70px;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -24,11 +24,17 @@
     display: flex;
     align-items: center;
     width: 100%;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.item-card.deleted {
+    opacity: 20;
+    background-color: #f8d7da;
 }
 
 .item-image {
-    width: 150px;
-    height: 150px;
+    width: 220px;
+    height: 250px;
     object-fit: cover;
     margin-right: 20px;
 }
@@ -47,38 +53,38 @@
 
 .item-details p {
     font-size: 16px;
-    color: #4caf50;
+    color: #081008;
     margin-bottom: 10px;
 }
 
 .item-actions {
     display: flex;
     gap: 10px;
+    margin-top: 10px;
 }
 
-.admin-button {
-    background-color: #4caf50; /* Green color */
+.item-actions button {
+    margin-top: auto;
+    background-color: #e60000;
+    height: 40px;
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 1px 20px;
+    font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.admin-button:hover {
-    background-color: #388e3c; /* Darker green on hover */
-}
-.item-actions button {
-    background-color: #e60000; /* Red for delete button */
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .item-actions button:hover {
-    background-color: #ce0202; /* Darker red on hover */
+    background-color: #ce0202;
+    transform: scale(1.05);
+}
+
+.suspend-button {
+    background-color: #e60000;
+}
+
+.suspend-button:hover {
+    background-color: #ce0202;
 }
