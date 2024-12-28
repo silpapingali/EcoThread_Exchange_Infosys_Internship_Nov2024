@@ -16,6 +16,10 @@ router.post("/", async (req, res) => {
     if (!user)
       return res.status(401).send({ message: "Invalid Email or Password" });
 
+    if (user.blocked) {
+      return res.status(403).send({ message: "Your account is blocked." });
+    }
+
     const validPassword = await bcrypt.compare(
       req.body.password,
       user.password
@@ -38,7 +42,7 @@ router.post("/", async (req, res) => {
         .send({ message: "An Email sent to your account please verify" });
     }
 
-    // Include role in the token payload
+
     const token = user.generateAuthToken();
     res.status(200).send({ data: { token, role: user.role }, message: "Logged in successfully" });
   } catch (error) {

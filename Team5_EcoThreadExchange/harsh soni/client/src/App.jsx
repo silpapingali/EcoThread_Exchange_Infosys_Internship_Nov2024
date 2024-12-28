@@ -4,7 +4,7 @@ import Login from "./components/Login";
 import Signup from "./components/SignUp"; 
 import UserHomePage from "./components/userMain"; 
 import EmailVerify from "./components/EmailVerify";
-import EditItem from "./components/Listings/EditItempage/EditItem"; 
+import EditItem from "./components/Listings/EditItemPage/EditItem"; 
 import CreateItem from "./components/Listings/CreateItemPage/CreateItem"; 
 import PublicListings from "./components/Listings/PublicItemPage/PublicListings"; 
 import ViewItem from "./components/Listings/ViewItemPage/ViewItem";
@@ -12,9 +12,9 @@ import Trades from './components/Listings/TradePage/Trades';
 import Logout from './components/Listings/LogoutPage/Logout'; 
 import AdminDashboard from './components/adminMain/AdminDashboard';
 import MyItem from './components/Listings/MyItemPage/MyItem';
+import UserDetailAdminPage from './components/adminMain/UserDetailAdminPage/UserDetailAdminPage';
 
-
-
+import AfterTradesComponent from './components/Listings/AfterTradesPage/AfterTradesComponent';
 
 const App = () => {
     const token = localStorage.getItem("token");
@@ -46,6 +46,10 @@ const App = () => {
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/create-item" element={<CreateItem />} />
                 <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin/user" element={<UserDetailAdminPage />} />
+                
+                <Route path="/after-trades" element={<AfterTradesComponent />} />
+
                 <Route path="*" element={<Navigate replace to="/" />} />
             </Routes>
         </Router>

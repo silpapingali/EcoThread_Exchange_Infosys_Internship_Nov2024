@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Navbar from "../Navbar/Navbar"; // Correct path to Navbar component
+import Navbar from "../Navbar/Navbar";
 import './PublicListings.css'; 
 import { Link } from 'react-router-dom'; 
 
@@ -10,18 +10,26 @@ const PublicListings = () => {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(10000); 
   const [searchTerm, setSearchTerm] = useState('');
+  const [userId, setUserId] = useState(null); 
 
   useEffect(() => {
-    const fetchListings = async () => {
-      try {
-        const response = await axios.get('http://localhost:8080/api/items');
-        setListings(response.data);
-        setFilteredListings(response.data); 
-      } catch (error) {
-        console.error("Error fetching listings:", error);
-      }
+    const fetchItems = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/items'); 
+            setListings(response.data); 
+            setFilteredListings(response.data); 
+
+          
+            const token = localStorage.getItem("token");
+            if (token) {
+                const decoded = JSON.parse(atob(token.split('.')[1]));
+                setUserId(decoded._id); 
+            }
+        } catch (error) {
+            console.error("Error fetching items:", error);
+        }
     };
-    fetchListings();
+    fetchItems();
   }, []);
 
   const handleSearch = () => {
@@ -39,6 +47,9 @@ const PublicListings = () => {
     });
     setFilteredListings(filtered);
   };
+
+
+  const visibleListings = filteredListings.filter(listing => listing.userId !== userId);
 
   return (
     <div className="public-listings3">
@@ -74,7 +85,7 @@ const PublicListings = () => {
           </div>
         </div>
         <div className="listings-container3">
-          {filteredListings.map((listing) => (
+          {visibleListings.map((listing) => (
             <div className="listing-card3" key={listing._id}>
               <img 
                 src={`http://localhost:8080/${listing.image}`} 

@@ -1,10 +1,10 @@
-const router = require("express").Router();
+const express = require('express');
+const router = express.Router();
 const { User, validate } = require("../models/user");
 const bcrypt = require("bcrypt");
 const Token = require("../models/token");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
-
 
 router.post("/", async (req, res) => {
   try {
@@ -23,10 +23,12 @@ router.post("/", async (req, res) => {
 
     user = await new User({ ...req.body, password: hashPassword }).save();
 
+    console.log("Attempting to create token for user:", user._id);
     const token = await new Token({
       userId: user._id,
       token: crypto.randomBytes(32).toString("hex"),
     }).save();
+    console.log("Token created:", token);
 
     const url = `${process.env.BASE_URL}users/${user._id}/verify/${token.token}`;
     await sendEmail(user.email, "Verify Email", url);
@@ -46,9 +48,8 @@ router.get("/:id/verify/:token", async (req, res) => {
 
     const token = await Token.findOne({ userId: req.params.id, token: req.params.token });
     if (!token) return res.status(400).send("Invalid token.");
-    
-    // Remove the token after verification
-    await token.deleteOne(); // Updated
+
+    await token.deleteOne(); 
     
 
     res.status(200).send({ message: "Email verified successfully" });
@@ -57,4 +58,36 @@ router.get("/:id/verify/:token", async (req, res) => {
     res.status(500).send({ message: "Internal Server Error" });
   }
 });
+
+router.put("/:id/block", async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, { blocked: true }, { new: true });
+    if (!user) return res.status(404).send({ message: "User not found" });
+    res.status(200).send({ message: "User blocked successfully", user });
+  } catch (error) {
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
+
+
+router.put("/:id/unblock", async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, { blocked: false }, { new: true });
+    if (!user) return res.status(404).send({ message: "User not found" });
+    res.status(200).send({ message: "User unblocked successfully", user });
+  } catch (error) {
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
+
+
+router.get('/', async (req, res) => {
+  try {
+    const users = await User.find(); 
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching users' });
+  }
+});
+
 module.exports = router;

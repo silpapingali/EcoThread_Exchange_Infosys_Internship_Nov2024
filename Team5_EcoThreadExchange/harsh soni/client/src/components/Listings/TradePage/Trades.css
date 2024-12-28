@@ -1,6 +1,7 @@
 .trades-container {
     padding: 20px;
     max-width: 1000px;
+    /* height: 650px; */
     margin: 0 auto;
     text-align: center;
     background-color: #4c4c4c;
@@ -44,11 +45,12 @@
     color: #333;
     text-align: left;
     margin: 0 10px;
+    height: 520px;
 }
 
 .trade-item-image {
     width: 100%;
-    height: 260px;
+    height: 320px;
     object-fit: cover;
 }
 
@@ -74,19 +76,33 @@
 }
 
 .propose-button {
-    background-color: #4caf50;
+    background-color: #4caf50; /* Green color for propose */
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 20px;
+    font-size: 16px;
+}
+
+.propose-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.cancel-button {
+    background-color: #f44336; /* Red color for cancel */
+}
+
+.cancel-button:hover {
+    background-color: #e53935; /* Darker red on hover */
 }
 
 .all-items-container {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+
     height: 300px;
 }
 
@@ -97,113 +113,27 @@
     height: 100%;
 }
 
-.trade-arrows {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
 .arrow {
-    font-size: 24px;
+    font-size: 34px;
     cursor: pointer;
     margin: 0 10px;
     user-select: none;
+    margin-top: -34px;
+  
 }
 
 .arrow:hover {
     color: #4caf50;
 }
 
-.image-navigation {
-    display: flex;
-    justify-content: space-between;
-    width: 100%; /* Full width for buttons */
-    margin-top: 10px; /* Space above buttons */
-}
-
-.image-navigation button {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.image-navigation button:hover {
-    background-color: #45a049;
-}
-
-.image-navigation button:disabled {
-    background-color: #ccc; /* Disabled button color */
-    cursor: not-allowed; /* Change cursor for disabled button */
-}
-
-.my-items-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 20px;
-    max-height: 300px; /* Optional: set a max height */
-    overflow-y: auto; /* Optional: enable scrolling if needed */
-    border: 1px solid #ccc; /* Optional: border around the container */
-    border-radius: 8px; /* Optional: rounded corners */
-    padding: 10px; /* Optional: padding inside the container */
-}
-
-.my-item {
-    display: flex;
-    align-items: center;
-    margin: 5px 0; /* Space between items */
-}
-
-.toggle-button {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.toggle-button:hover {
-    background-color: #45a049;
-}
-
-.toggle-container {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.my-items-list {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.my-items-list div {
-    margin: 5px 0;
-}
-
-.arrow-container {
-    display: flex;
-    justify-content: center; /* Center the arrow */
-    align-items: center; /* Center vertically */
-    margin: 0 20px; /* Space around the arrow */
-}
-
-.arrow {
-    font-size: 40px; /* Size of the arrow */
-    color: #000000; /* Color of the arrow */
-    user-select: none; /* Prevent text selection */
-}
-
-.arrow1{
+.arrow1 {
     font-size: 100px; /* Size of the arrow */
     color: #ffffff; /* Color of the arrow */
     user-select: none; /* Prevent text selection */
+}
+
+.pending-message {
+    color: #ffaf01; /* Orange color for pending message */
+    font-size: 24px;
+    margin: 10px 0; /* Space above and below the message */
 }

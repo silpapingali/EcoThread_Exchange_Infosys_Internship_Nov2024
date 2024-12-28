@@ -1,9 +1,6 @@
 .admin-dashboard {
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
-    padding: 20px;
-    max-width: 1500px;
+    padding: 70px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -67,6 +64,24 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.item-card.deleted {
+    opacity: 20;
+    background-color: #f8d7da;
+}
+
+.item-image {
+    width: 220px;
+    height: 250px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.item-details {
+    flex: 1;
     padding: 15px;
 }
 
@@ -78,8 +93,10 @@
     margin-bottom: 10px;
 }
 
-.item-details {
-    text-align: center;
+.item-details p {
+    font-size: 16px;
+    color: #081008;
+    margin-bottom: 10px;
 }
 
 .item-actions {
@@ -90,30 +107,27 @@
 }
 
 .item-actions button {
-    background-color: #4caf50;
+    margin-top: auto;
+    background-color: #e60000;
+    height: 40px;
     color: white;
     border: none;
-    padding: 8px 12px;
+    padding: 1px 20px;
+    font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .item-actions button:hover {
-    background-color: #388e3c;
+    background-color: #ce0202;
+    transform: scale(1.05);
 }
 
-.item-actions button:nth-child(3) {
+.suspend-button {
     background-color: #e60000;
 }
 
-.item-actions button:nth-child(3):hover {
-    background-color: #b80000;
-}
-
-.dashboard-footer {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
-    color: #555;
+.suspend-button:hover {
+    background-color: #ce0202;
 }

@@ -33,16 +33,27 @@ const CreateItem = () => {
             formDataToSubmit.append(key, formData[key]);
         }
 
-        
+      
+        const token = localStorage.getItem("token"); 
+
         try {
             const response = await fetch('http://localhost:8080/api/items', {
                 method: 'POST',
+                headers: {
+                    'x-auth-token': token, 
+                },
                 body: formDataToSubmit,
             });
+
+            if (!response.ok) {
+                const errorText = await response.text(); 
+                throw new Error(errorText); 
+            }
+
             const newItem = await response.json();
             console.log("New item created:", newItem);
             alert("New item created successfully!");
-            navigate('/');
+            navigate('/myitem');
         } catch (error) {
             console.error("Error creating item:", error);
             alert("Failed to create item. Please try again.");

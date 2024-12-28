@@ -1,19 +1,19 @@
-// src/components/IndexListings.jsx
+
 import React from 'react';
 import { Link } from 'react-router-dom'; 
 import './IndexListings.css'; 
 
 const IndexListings = ({ listings }) => {
-  // Function to shuffle the listings array
+
   const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+      [array[i], array[j]] = [array[j], array[i]]; 
     }
     return array;
   };  
 
-  // Shuffle listings and limit to 4 random items
+
   const randomListings = shuffleArray([...listings]).slice(0, 4);
 
   return (

@@ -1,0 +1,73 @@
+.user-detail-admin-page {
+    padding: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.user-detail-admin-page h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+}
+
+.user-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.user-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.2s;
+}
+
+.user-card:hover {
+    transform: translateY(-5px);
+}
+
+.user-card h3 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.user-card p {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+}
+
+.user-card h4 {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #4caf50;
+}
+
+.user-actions {
+    margin-top: 15px;
+}
+
+.user-actions button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.user-actions button:hover {
+    background-color: #388e3c;
+}
+
+.user-actions button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+} 

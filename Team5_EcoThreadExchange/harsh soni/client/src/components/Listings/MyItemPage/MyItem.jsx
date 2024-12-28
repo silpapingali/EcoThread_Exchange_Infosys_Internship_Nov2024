@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Navbar from "../Navbar/Navbar"; // Correct path to Navbar component
+import Navbar from "../Navbar/Navbar"; 
 
 import './MyItem.css'; 
 import { Link } from 'react-router-dom'; 
@@ -13,9 +13,16 @@ const MyItem = () => {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/items');
-        setListings(response.data);
-        setFilteredListings(response.data); 
+        const token = localStorage.getItem("token");
+        const response = await axios.get('http://localhost:8080/api/items', {
+          headers: {
+            'x-auth-token': token, 
+          },
+        });
+        const userId = JSON.parse(atob(token.split('.')[1]))._id; 
+        const userItems = response.data.filter(item => item.userId === userId); 
+        setListings(userItems);
+        setFilteredListings(userItems); 
       } catch (error) {
         console.error("Error fetching listings:", error);
       }

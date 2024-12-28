@@ -1,0 +1,100 @@
+.after-trades-container {
+    padding: 20px;
+    padding-top: 100px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.trade-details-container {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #ffffff;
+}
+
+.proposed-item-container, .selected-item-container {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.proposed-item, .user-item {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.proposed-item img, .user-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+h1 {
+    color: #333;
+}
+
+h2 {
+    color: #4caf50;
+}
+
+p {
+    color: #555;
+}
+
+.popup-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.popup-message button {
+    margin-top: 10px;
+}
+
+.request-check-container {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.request-check-container h2 {
+    margin-bottom: 10px;
+}
+
+.request-check-container .proposal-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.trade-details-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pending-status p {
+    text-align: center;
+   margin-right: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: red; 
+    border: 1px solid red;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #ffe6e6; 
+}
+
