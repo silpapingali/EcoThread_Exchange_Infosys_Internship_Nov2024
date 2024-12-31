@@ -4,43 +4,7 @@
     min-height: 100vh;
 }
 
-.admin-dashboard h1 {
-    text-align: center;
-    color: #333;
-    margin: 20px 0;
-}
 
-.search-section-admin {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-    gap: 10px;
-}
-
-.search-section-admin input {
-    padding: 10px;
-    width: 300px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.search-section-admin button {
-    padding: 10px 20px;
-    background-color:#4caf50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.search-section-admin button:hover {
-    background-color: #417343;
-}
-
-.item-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     padding: 20px;
 }
@@ -49,12 +13,7 @@
     background-color: white;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
-}
 
-.item-card:hover {
-    transform: translateY(-5px);
 }
 
 .item-card.Suspended {
@@ -72,9 +31,7 @@
     padding: 15px;
 }
 
-.item-details h3 {
-    margin: 0 0 10px 0;
-    color: #333;
+
 }
 
 .item-details p {
@@ -84,8 +41,7 @@
 
 .item-actions {
     display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
+
     gap: 10px;
 }
 
