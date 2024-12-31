@@ -1,0 +1,80 @@
+
+.trade-item-form-container {
+    max-width: 600px;
+    margin: 70px auto;
+    margin-bottom: 10px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #b3dcdf;
+  }
+  
+  .trade-item-form-container h2 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .trade-item-form-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  .trade-item-form-container input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .trade-item-form-container button {
+    width: 30%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .trade-item-form-container button:disabled {
+    background-color: #ccc;
+    cursor: allowed;
+  }
+  
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #069494; 
+    padding: 10px 20px;
+    color: white;
+    font-family: 'Dancing Script', cursive;
+    font-weight: bold;
+    font-size: 110%;
+  }
+  .navbar-left .brand-name {
+    font-size: 1.8em;
+    font-weight: bold;
+  }
+  .navbar-right {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    max-width: 600px;
+  }
+  .nav-link {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2em;
+    padding: 0 15px;
+    text-align: center;
+    transition: color 0.3s ease;
+  }
+  .nav-link:hover {
+    color: #333;
+    text-decoration: underline;
+  }
+  

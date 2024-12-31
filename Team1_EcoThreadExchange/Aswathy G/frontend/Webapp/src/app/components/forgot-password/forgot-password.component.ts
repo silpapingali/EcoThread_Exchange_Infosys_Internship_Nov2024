@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule],  // Include the necessary modules here
   templateUrl: './forgot-password.component.html',
+  styleUrl: './forgot-password.component.scss',
 })
 export class ForgotPasswordComponent {
   formbuilder=inject(FormBuilder);
@@ -21,7 +23,10 @@ export class ForgotPasswordComponent {
   forgotPasswordForm=this.formbuilder.group({
     email:['',[Validators.required,Validators.email]],
   })
-  constructor(private http:HttpClient,private router:Router) {
+  constructor(private http:HttpClient,private router:Router) {   
+  }
+  redirectToLogin(): void {   //redirecting to login page button.
+    this.router.navigate(['/login']);
   }
 
   // Method to handle form submission
@@ -43,7 +48,6 @@ sendResetLink(email: string) {
         this.message='Password reset link has been sent to your email.';
       },
       error: (err) => {
-        console.error('Error response:', err);
         this.message = 'There was an error. Please try again later.';
       },
       });

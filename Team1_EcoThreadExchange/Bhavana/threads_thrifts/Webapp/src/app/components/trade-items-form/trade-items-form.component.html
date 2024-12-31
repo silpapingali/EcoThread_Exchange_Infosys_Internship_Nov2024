@@ -1,0 +1,94 @@
+<nav class="navbar">
+  <div class="navbar-left">
+    <span class="brand-name">Threads & Thrift</span>
+  </div>
+  <div class="navbar-right">
+    <a href="http://localhost:4200/home" class="nav-link">Dashboard</a>
+    <a href="http://localhost:4200/allitems" class="nav-link">Items</a>
+    <a href="http://localhost:4200/mytrades" class="nav-link">Trades</a>
+    <a href="#" class="nav-link">Logout</a>
+  </div>
+</nav>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+<body id="container2">
+<div class="trade-item-form-container">
+  <h2>Create a New Trade Item</h2>
+  <form [formGroup]="tradeItemForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data ">
+    <!-- Title Field -->
+    <label for="title">Title:</label>
+    <input id="title" formControlName="title" type="text" maxlength="200" required />
+    <div *ngIf="tradeItemForm.get('title')?.invalid && tradeItemForm.get('title')?.touched" class="error">
+      Please enter a title.
+    </div>
+    <div *ngIf="tradeItemForm.get('title')?.hasError('maxlength')" class="error-message">
+      Title cannot exceed 200 characters.
+    </div>
+
+    <!-- Size Field -->
+    <label for="size">Size:</label>
+    <input id="size" formControlName="size" type="text" maxlength="200" required />
+    <div *ngIf="tradeItemForm.get('size')?.invalid && tradeItemForm.get('size')?.touched" class="error">
+      Please enter the size.
+    </div>
+    <div *ngIf="tradeItemForm.get('size')?.hasError('maxlength')" class="error-message">
+      Title cannot exceed 200 characters.
+    </div>
+
+    <!-- Condition Field -->
+    <label for="condition">Condition:</label>
+    <input id="condition" formControlName="condition" type="text" maxlength="200" required />
+    <div *ngIf="tradeItemForm.get('condition')?.invalid && tradeItemForm.get('condition')?.touched" class="error">
+      Please specify the condition.
+    </div>
+    <div *ngIf="tradeItemForm.get('condition')?.hasError('maxlength')" class="error-message">
+      Title cannot exceed 200 characters.
+    </div>
+
+    <!-- Preferences Field -->
+    <label for="preferences">Preferences:</label>
+    <input id="preferences" formControlName="preferences" type="text" maxlength="200"required (focus)="showPreferencesHint = true"
+    (blur)="showPreferencesHint = false"/>
+    <div *ngIf="showPreferencesHint" class="hint-message">
+      Please enter in this format:shoes,hat,glass etc.
+    </div>
+    <div *ngIf="tradeItemForm.get('preferences')?.invalid && tradeItemForm.get('preferences')?.touched" class="error">
+      Please enter your preferences.
+    </div>
+    <div *ngIf="tradeItemForm.get('preferences')?.hasError('maxlength')" class="error-message">
+      Title cannot exceed 200 characters.
+    </div>
+
+    <!-- Image Upload Field -->
+    <label for="images">Select up to 5(PNG,JPG,JPEG )Images (Total size must not exceed 50MB):</label>
+    <input
+      id="images"
+      type="file"
+      multiple
+      (change)="onFilesSelected($event)"
+      (blur)="onImageBlur()"
+      accept=".png, .jpg, .jpeg"
+    />
+    <div *ngIf="imageError" class="error-message">Please select at least one image.</div>
+
+
+    <label for="username">Username:</label>
+    <input id="username" formControlName="username" type="text" maxlength="200"required />
+    <div *ngIf="formSubmitted && tradeItemForm.get('username')?.invalid" class="error-message">
+      Please provide a username
+    </div>
+    <div *ngIf="tradeItemForm.get('username')?.hasError('maxlength')" class="error-message">
+      Title cannot exceed 200 characters.
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" [disabled]="tradeItemForm.invalid || selectedFiles.length === 0">Submit</button>
+    <div *ngIf="formSubmitted && tradeItemForm.invalid" class="error-message">
+      Please fill all the fields properly
+    </div>
+    <div *ngIf="showSuccessMessage" class="success-message">
+      Successfully registered!
+    </div>
+  </form>
+</div>
+
+</body>

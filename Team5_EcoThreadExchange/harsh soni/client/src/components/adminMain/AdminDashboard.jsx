@@ -128,6 +128,9 @@ const AdminDashboard = () => {
                     })
                 )}
             </div>
+            <footer className="dashboard-footer">
+                Threads&Thrift. All rights reserved. 2024
+            </footer>
         </div>
     );
 };

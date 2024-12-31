@@ -16,11 +16,11 @@ const Login = () => {
 		try {
 			const url = "http://localhost:8080/api/auth";
 			const { data: res } = await axios.post(url, data);
-			
+
 			// Store token and role in local storage
 			localStorage.setItem("token", res.data.token);
 			localStorage.setItem("role", res.data.role);
-	
+
 			// Redirect based on role
 			if (res.data.role === "admin") {
 				window.location = "/admin-home";
@@ -37,7 +37,7 @@ const Login = () => {
 			}
 		}
 	};
-	
+
 
 	return (
 		<div className={styles.login_container}>
@@ -64,21 +64,26 @@ const Login = () => {
 							required
 							className={styles.input}
 						/>
-						{error && <div className={styles.error_msg}>{error}</div>}
-						<button type="submit" className={styles.green_btn}>
-							Sing In
-						</button>
-					</form>
-					<div className={styles.signup_text}>
-						<p>New Here ?</p>
-						<Link to="/signup" className={styles.signup_link}>
-							Sign Up
+						<Link to="/forgot-password" style={{ alignSelf: "flex-start" }} >
+							<p style={{ padding: "0 15px" }}> Forgot Password?</p>
 						</Link>
-					</div>
 
-				</div>
+
+				{error && <div className={styles.error_msg}>{error}</div>}
+				<button type="submit" className={styles.green_btn}>
+					Sing In
+				</button>
+			</form>
+			<div className={styles.signup_text}>
+				<p>New Here ?</p>
+				<Link to="/signup" className={styles.signup_link}>
+					Sign Up
+				</Link>
 			</div>
+
 		</div>
+			</div >
+		</div >
 	);
 };
 

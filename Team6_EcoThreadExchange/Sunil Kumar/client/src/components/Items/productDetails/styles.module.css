@@ -1,0 +1,142 @@
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+    color: #2d3748;
+  }
+  
+  .backButton {
+    background-color: #4fd1c5;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+  }
+  
+  .backButton:hover {
+    background-color: #38b2ac;
+  }
+  
+  .content {
+    background-color: white;
+    border-radius: 8px;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .imageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  .productImage {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #4fd1c5;
+    border-radius: 4px;
+  }
+  
+  .details {
+    padding: 1rem;
+  }
+  
+  .details h2 {
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+  }
+  
+  .detailSection {
+    margin-bottom: 1.5rem;
+  }
+  
+  .detailSection h3 {
+    color: #4a5568;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+  }
+  
+  .detailSection p {
+    color: #718096;
+    font-size: 1.1rem;
+  }
+  
+  .preferences {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .preference {
+    background-color: #4fd1c5;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+  
+  .postedBy {
+    margin: 1.5rem 0;
+    color: #718096;
+  }
+  
+  .username {
+    color: #4fd1c5;
+    font-weight: 600;
+  }
+  
+  .tradeButton {
+    background-color: #4fd1c5;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    width: 100%;
+    margin-top: 1rem;
+    transition: background-color 0.2s;
+  }
+  
+  .tradeButton:hover {
+    background-color: #38b2ac;
+  }
+  
+  .loadingContainer,
+  .errorContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+  }
+  
+  .loading,
+  .error {
+    font-size: 1.2rem;
+    color: #4a5568;
+    margin-bottom: 1rem;
+  }
+  
+  .error {
+    color: #e53e3e;
+  }

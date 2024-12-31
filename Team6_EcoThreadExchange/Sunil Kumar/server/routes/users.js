@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
       .status(201)
       .send({ message: "An Email sent to your account please verify" });
   } catch (error) {
-    res.status(500).send({ message: "Internal Server Error" });
+    res.status(500).send({ message: "Interna Server Error" });
   }
 });
 
