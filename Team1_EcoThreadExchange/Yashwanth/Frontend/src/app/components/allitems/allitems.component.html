@@ -1,0 +1,84 @@
+
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+<nav class="navbar">
+  <div class="navbar-left">
+    <span class="brand-name">Threads & Thrift</span>
+  </div>
+  <div class="navbar-right">
+    <a href="http://localhost:4200/home" class="nav-link">Dashboard</a>
+    <a href="http://localhost:4200/allitems" class="nav-link">Items</a>
+    
+    <a *ngIf="!isAdmin" href="http://localhost:4200/mytrades" class="nav-link">Trades</a>
+    
+    <a *ngIf="isAdmin" href="http://localhost:4200/allusers" class="nav-link">Users</a>
+    <button (click)="logout()">Logout</button>
+  </div>
+</nav>
+
+<div class="page-container">
+  <div class="sidebar">
+    <button *ngIf="!isAdmin"   class="sidebar-button"  (click)="navigateToForm()" routerLink="http://localhost:4200/trade-items-form">New Trade Item</button>
+    <div class="search-box">
+      <input
+        type="text"
+        placeholder="Search Items..."
+        class="search-input"
+        [(ngModel)]="filters.searchTerm"
+        (ngModelChange)="onSearchChange()" />
+    </div>
+    <div class="filter">
+      <label for="exactMatch">Exact Match:</label>
+      <input type="checkbox" id="exactMatch" [(ngModel)]="filters.exactMatch" (change)="onExactMatchToggle()" />
+    </div>
+    <div class="filter">
+      <label for="date">Date:</label>
+      <input type="date" id="date" [(ngModel)]="filters.date" (change)="onDateChange()" />
+    </div>
+  </div>
+  
+  <div class="content">
+    <div *ngIf="loading" class="loading">
+      <p>Loading all items...</p>
+    </div>
+    <div *ngIf="!loading && errorMessage" class="error">
+      <p>{{ errorMessage }}</p>
+    </div>
+    <div *ngIf="!loading && !errorMessage && allItems.length === 0" class="no-items">
+      <p>No items found.</p>
+    </div>
+    <div *ngIf="!loading && !errorMessage && allItems.length > 0" class="item-list">
+      <div *ngFor="let item of allItems" class="item-card">
+        <div class="item-info">
+          <div class="item-card-header"  [ngClass]="{'suspended-item': item.userId?.isSuspended}">
+            <h3>{{ item.title }} </h3>
+          </div>
+          <div class="item-card-body">
+            <p><strong>Size:</strong> {{ item.size }}</p>
+            <p><strong>Condition:</strong> {{ item.condition }}</p>
+            <p><strong>Preferences:</strong> {{ item.preferences.join(', ') }}</p>
+            <p><strong>Posted On:</strong>{{item.createdAt|date:'dd-MM-yyyy'}}</p>
+            
+            <p *ngIf="!isAdmin && item.isBlocked" class="blocked-message">This item is blocked and cannot be traded.</p>
+            <button *ngIf="isAdmin && !item.userId?.isSuspended" (click)="onBlockClick(item)" [ngClass]="{'block-button': !item.isBlocked, 'unblock-button': item.isBlocked}">
+              {{ item.isBlocked ? 'Unblock' : 'Block' }}
+            </button>
+            <button  *ngIf="!isAdmin && !item.isBlocked  && !item.userId?.isSuspended " class="butonnn" (click)="onTradeClick(item)">
+              {{item.isBlocked ?'':'TradeNow'}}</button> 
+              
+
+          </div>
+        </div>
+        <div class="item-image">
+          <img *ngIf="item.image" [src]="'http://localhost:3000/uploads/' + item.image[0]" alt="{{ item.title }}" />
+          <p *ngIf="!item.image">No image available</p>
+        </div>
+      </div>
+    </div>
+    <div class="pagination">
+      <button [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)" class="butonn">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button [disabled]="currentPage === totalPages" (click)="changePage(currentPage + 1)" class="butonn">Next</button>
+    </div>
+  </div>
+</div>
