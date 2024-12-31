@@ -1,100 +1,174 @@
 .after-trades-container {
     padding: 20px;
-    padding-top: 100px;
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 120px auto 0;
+    min-height: 70vh;
 }
 
-.trade-details-container {
+.trade-status-container {
+    background-color: #4c4c4c;
+    padding: 30px;
+    border-radius: 60px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+.trade-status-container h2 {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.items-container {
     display: flex;
-    justify-content: space-between;
-    border: 1px solid #ccc;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin: 30px 0;
+}
+
+.proposed-item, .selected-item {
+    background-color: white;
+    border: 4px solid #1a3a19;
     border-radius: 8px;
-    padding: 15px;
-    background-color: #ffffff;
-}
-
-.proposed-item-container, .selected-item-container {
-    flex: 1;
-    margin-right: 20px;
-}
-
-.proposed-item, .user-item {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    background-color: #f9f9f9;
-}
-
-.proposed-item img, .user-item img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-}
-
-h1 {
+    padding: 20px;
+    width: 300px;
     color: #333;
 }
 
-h2 {
-    color: #4caf50;
-}
-
-p {
-    color: #555;
-}
-
-.popup-message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 20px;
-    z-index: 1000;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.popup-message button {
-    margin-top: 10px;
-}
-
-.request-check-container {
-    margin: 20px 0;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-}
-
-.request-check-container h2 {
-    margin-bottom: 10px;
-}
-
-.request-check-container .proposal-buttons {
-    display: flex;
-    gap: 10px;
-}
-
-.trade-details-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.pending-status p {
+.proposed-item h3, .selected-item h3 {
     text-align: center;
-   margin-right: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    color: red; 
-    border: 1px solid red;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #ffe6e6; 
+    color: #1a3a19;
+    margin-bottom: 15px;
+    font-size: 20px;
 }
 
+.proposed-item img, .selected-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.item-details {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.item-details h4 {
+    color: #1a3a19;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.item-details p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.trade-arrow {
+    font-size: 48px;
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.status-message {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.status-accepted {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.status-rejected {
+    color: #f44336;
+    font-weight: bold;
+}
+
+.back-button {
+    display: block;
+    margin: 30px auto 0;
+    padding: 12px 30px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #45a049;
+}
+
+@media (max-width: 768px) {
+    .items-container {
+        flex-direction: column;
+    }
+
+    .proposed-item, .selected-item {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .trade-arrow {
+        transform: rotate(90deg);
+    }
+}
+
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+.accept-button,
+.reject-button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.accept-button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.accept-button:hover {
+    background-color: #45a049;
+}
+
+.reject-button {
+    background-color: #f44336; /* Red */
+    color: white;
+}
+
+.reject-button:hover {
+    background-color: #e53935;
+}
+
+.action-buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}

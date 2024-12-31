@@ -137,3 +137,11 @@
     font-size: 24px;
     margin: 10px 0; /* Space above and below the message */
 }
+
+
+.propose-button.loading {
+    cursor: not-allowed;
+    background-color: grey;
+  }
+  
+  

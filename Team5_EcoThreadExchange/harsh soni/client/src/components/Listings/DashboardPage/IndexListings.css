@@ -83,9 +83,54 @@
 .view-link2:hover {
     background-color: #3a9a9f;
 }
-.recommended-heading2{
+
+.recommended-heading2 {
     margin-top: 100px;
     margin-left: 60px;
     font-size: 34px;
     margin-bottom: -40px;
+}
+
+.trade-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.trade-details:hover {
+    transform: scale(1.05);
+}
+
+.trade-details img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.trade-details h4  {
+    margin: 5px 0;
+    font-size: 26px;
+}
+
+.trade-details p  {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.my-trades-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin: 20px 0;
 }

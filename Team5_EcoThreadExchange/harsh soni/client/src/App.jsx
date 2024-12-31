@@ -4,7 +4,7 @@ import Login from "./components/Login";
 import Signup from "./components/SignUp"; 
 import UserHomePage from "./components/userMain"; 
 import EmailVerify from "./components/EmailVerify";
-import EditItem from "./components/Listings/EditItemPage/EditItem"; 
+import EditItem from "./components/Listings/EditItemPage/EditItem";
 import CreateItem from "./components/Listings/CreateItemPage/CreateItem"; 
 import PublicListings from "./components/Listings/PublicItemPage/PublicListings"; 
 import ViewItem from "./components/Listings/ViewItemPage/ViewItem";

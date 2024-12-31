@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Navbar from "../Navbar/Navbar"; 
-
 import './MyItem.css'; 
 import { Link } from 'react-router-dom'; 
 
@@ -20,7 +19,7 @@ const MyItem = () => {
           },
         });
         const userId = JSON.parse(atob(token.split('.')[1]))._id; 
-        const userItems = response.data.filter(item => item.userId === userId); 
+        const userItems = response.data.filter(item => item.userId === userId && !item.traded); // Exclude traded items
         setListings(userItems);
         setFilteredListings(userItems); 
       } catch (error) {
@@ -30,10 +29,11 @@ const MyItem = () => {
     fetchListings();
   }, []);
 
-  const handleSearch = () => {
+  const handleSearch = (value) => {
+    const searchValue = value.toLowerCase();
     const filtered = listings.filter((listing) =>
-      listing.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      listing.description.toLowerCase().includes(searchTerm.toLowerCase())
+      listing.title.toLowerCase().includes(searchValue) ||
+      listing.description.toLowerCase().includes(searchValue)
     );
     setFilteredListings(filtered); 
   };
@@ -50,34 +50,44 @@ const MyItem = () => {
           type="text"
           placeholder="Search items..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyPress={(e) => e.key === 'Enter' && handleSearch()} 
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            handleSearch(e.target.value);
+          }}
+          onKeyPress={(e) => e.key === 'Enter' && handleSearch(searchTerm)} 
         />
-        <button onClick={handleSearch}>Search</button>
+        <button onClick={() => handleSearch(searchTerm)}>Search</button>
       </div>
       <div className="content-container1">
         <div className="listings-container1">
-          {filteredListings.map((listing) => (
-            <div className="myitem-listing-card1" key={listing._id}>
-              <img 
-                src={`http://localhost:8080/${listing.image}`} 
-                alt={listing.title} 
-                className="listing-image1" 
-              />
-              <div className="listing-details1">
-                <h4>{listing.title}</h4>
-                <p>Size: {listing.size}</p>
-                <p>Price: &#8377; {listing.price.toLocaleString("en-IN")}</p>
-                <p>Preferences: {listing.preferences}</p>
-                <p className="listing-posted1">
-                  Posted by: {listing.postedBy} on {listing.createdAt ? new Date(listing.createdAt).toLocaleDateString() : new Date().toLocaleDateString()}
-                </p>
-                <div className="button-container">
-                  <Link to={`/listings/${listing._id}/edit`} className="edit-button">Edit</Link>
+          {filteredListings.length === 0 ? (
+            <div className="no-results-message1">
+              <h3>No items found</h3>
+              <p>Sorry, we couldn't find any items matching your search criteria.</p>
+            </div>
+          ) : (
+            filteredListings.map((listing) => (
+              <div className="myitem-listing-card1" key={listing._id}>
+                <img 
+                  src={`http://localhost:8080/${listing.image}`} 
+                  alt={listing.title} 
+                  className="listing-image1" 
+                />
+                <div className="listing-details1">
+                  <h4>{listing.title}</h4>
+                  <p>Size: {listing.size}</p>
+                  <p>Price: &#8377; {listing.price.toLocaleString("en-IN")}</p>
+                  <p>Preferences: {listing.preferences}</p>
+                  <p className="listing-posted1">
+                    Posted by: {listing.postedBy} on {listing.createdAt ? new Date(listing.createdAt).toLocaleDateString() : new Date().toLocaleDateString()}
+                  </p>
+                  <div className="button-container">
+                    <Link to={`/listings/${listing._id}/edit`} className="edit-button">Edit</Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </div>

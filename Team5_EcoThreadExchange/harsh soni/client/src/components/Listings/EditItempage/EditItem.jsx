@@ -13,6 +13,8 @@ const EditItem = ({ onUpdate }) => {
         preferences: '',
         size: '',
     });
+    const [preferencesWarning, setPreferencesWarning] = useState('');
+    const [notification, setNotification] = useState({ message: '', type: '' });
 
     useEffect(() => {
         const fetchItem = async () => {
@@ -26,15 +28,58 @@ const EditItem = ({ onUpdate }) => {
         fetchItem();
     }, [id]);
 
+    const showNotification = (message, type) => {
+        setNotification({ message, type });
+        setTimeout(() => {
+            setNotification({ message: '', type: '' });
+        }, 3000);
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        if (name === 'preferences') {
+            if (/[^a-zA-Z0-9\s,]/.test(value)) {
+                setPreferencesWarning('Please use only letters, numbers, and spaces');
+                showNotification('Please use only letters, numbers, and spaces', 'warning');
+            } else {
+                setPreferencesWarning('');
+            }
+
+            const formattedValue = value
+                .split(' ')
+                .filter(word => word.length > 0)
+                .join(', ');
+
+            if (formattedValue.split(',').length > 5) {
+                setPreferencesWarning('Maximum 5 preferences allowed');
+                showNotification('Maximum 5 preferences allowed', 'warning');
+            }
+
+            setFormData({ ...formData, [name]: formattedValue });
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (preferencesWarning) {
+            showNotification('Please fix the preferences issues before submitting', 'error');
+            return;
+        }
+
+        const formattedPreferences = formData.preferences
+            .split(',')
+            .map(pref => pref.trim())
+            .filter(pref => pref.length > 0)
+            .join(', ');
+
         try {
-            await axios.put(`http://localhost:8080/api/items/${id}`, formData);
+            await axios.put(`http://localhost:8080/api/items/${id}`, {
+                ...formData,
+                preferences: formattedPreferences
+            });
             alert("Item updated successfully!");
             // navigate('/listings');
         } catch (error) {
@@ -49,6 +94,11 @@ const EditItem = ({ onUpdate }) => {
 
     return (
         <div className="edit-item">
+            {notification.message && (
+                <div className={`notification ${notification.type}`}>
+                    {notification.message}
+                </div>
+            )}
             <h1>Edit Item</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="title">Title</label>
@@ -59,7 +109,6 @@ const EditItem = ({ onUpdate }) => {
 
                 <label htmlFor="price">Price</label>
                 <input id="price" name="price" value={formData.price} onChange={handleChange} type="number" required />
-
 
                 <label htmlFor="preferences">Preferences</label>
                 <input id="preferences" name="preferences" value={formData.preferences} onChange={handleChange} type="text" required />
