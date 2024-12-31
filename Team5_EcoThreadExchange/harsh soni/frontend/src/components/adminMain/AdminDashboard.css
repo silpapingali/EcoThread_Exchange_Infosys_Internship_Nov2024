@@ -1,0 +1,146 @@
+.admin-dashboard {
+    padding: 20px;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+}
+
+.admin-dashboard h1 {
+    text-align: center;
+    color: #333;
+    margin: 20px 0;
+}
+
+.search-section-admin {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 10px;
+}
+
+.search-section-admin input {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.search-section-admin button {
+    padding: 10px 20px;
+    background-color:#4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.search-section-admin button:hover {
+    background-color: #417343;
+}
+
+.item-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.item-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.item-card:hover {
+    transform: translateY(-5px);
+}
+
+.item-card.Suspended {
+    opacity: 0.7;
+    background-color: #f8d7da;
+}
+
+.item-image {
+    width: 100%;
+    height: 310px;
+    object-fit: cover;
+}
+
+.item-details {
+    padding: 15px;
+}
+
+.item-details h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.item-details p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.item-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    gap: 10px;
+}
+
+.delete-button, .suspend-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+.suspend-button {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.suspend-button:hover {
+    background-color: #e0a800;
+}
+
+.suspend-info button {
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: not-allowed;
+}
+
+.no-results-message-admin {
+    text-align: center;
+    padding: 40px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    grid-column: 1 / -1;
+}
+
+.no-results-message-admin h3 {
+    color: #343a40;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.no-results-message-admin p {
+    color: #6c757d;
+    font-size: 1rem;
+}
