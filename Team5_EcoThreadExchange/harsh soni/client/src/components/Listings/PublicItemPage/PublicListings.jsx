@@ -19,7 +19,6 @@ const PublicListings = () => {
             setListings(response.data); 
             setFilteredListings(response.data); 
 
-          
             const token = localStorage.getItem("token");
             if (token) {
                 const decoded = JSON.parse(atob(token.split('.')[1]));
@@ -32,10 +31,11 @@ const PublicListings = () => {
     fetchItems();
   }, []);
 
-  const handleSearch = () => {
+  const handleSearch = (value) => {
+    const searchValue = value.toLowerCase();
     const filtered = listings.filter((listing) =>
-      listing.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      listing.description.toLowerCase().includes(searchTerm.toLowerCase())
+      listing.title.toLowerCase().includes(searchValue) ||
+      listing.description.toLowerCase().includes(searchValue)
     );
     setFilteredListings(filtered); 
   };
@@ -48,8 +48,7 @@ const PublicListings = () => {
     setFilteredListings(filtered);
   };
 
-
-  const visibleListings = filteredListings.filter(listing => listing.userId !== userId);
+  const visibleListings = filteredListings.filter(listing => listing.userId !== userId && !listing.traded); // Exclude traded items
 
   return (
     <div className="public-listings3">
@@ -59,10 +58,13 @@ const PublicListings = () => {
           type="text"
           placeholder="Search items..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyPress={(e) => e.key === 'Enter' && handleSearch()} 
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            handleSearch(e.target.value);
+          }}
+          onKeyPress={(e) => e.key === 'Enter' && handleSearch(searchTerm)} 
         />
-        <button onClick={handleSearch}>Search</button>
+        <button onClick={() => handleSearch(searchTerm)}>Search</button>
       </div>
       <div className="content-container3">
         <div className="filter-container3">
@@ -85,27 +87,34 @@ const PublicListings = () => {
           </div>
         </div>
         <div className="listings-container3">
-          {visibleListings.map((listing) => (
-            <div className="listing-card3" key={listing._id}>
-              <img 
-                src={`http://localhost:8080/${listing.image}`} 
-                alt={listing.title} 
-                className="listing-image3" 
-              />
-              <div className="listing-details3">
-                <h4>{listing.title}</h4>
-                <p>Size: {listing.size}</p>
-                <p>Price: &#8377; {listing.price.toLocaleString("en-IN")}</p>
-                <p>Preferences: {listing.preferences}</p>
-                <p className="listing-posted3">
-                  Posted by: {listing.postedBy} on {listing.createdAt ? new Date(listing.createdAt).toLocaleDateString() : new Date().toLocaleDateString()}
-                </p>
-                <div className="button-container3">
-                  <Link to={`/listings/${listing._id}`} className="view-button3">View</Link>
+          {visibleListings.length === 0 ? (
+            <div className="no-results-message3">
+              <h3>No items found</h3>
+              <p>Sorry, we couldn't find any items matching your search criteria.</p>
+            </div>
+          ) : (
+            visibleListings.map((listing) => (
+              <div className="listing-card3" key={listing._id}>
+                <img 
+                  src={`http://localhost:8080/${listing.image}`} 
+                  alt={listing.title} 
+                  className="listing-image3" 
+                />
+                <div className="listing-details3">
+                  <h4>{listing.title}</h4>
+                  <p>Size: {listing.size}</p>
+                  <p>Price: &#8377; {listing.price.toLocaleString("en-IN")}</p>
+                  <p>Preferences: {listing.preferences}</p>
+                  <p className="listing-posted3">
+                    Posted by: {listing.postedBy} on {listing.createdAt ? new Date(listing.createdAt).toLocaleDateString() : new Date().toLocaleDateString()}
+                  </p>
+                  <div className="button-container3">
+                    <Link to={`/listings/${listing._id}`} className="view-button3">View</Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </div>

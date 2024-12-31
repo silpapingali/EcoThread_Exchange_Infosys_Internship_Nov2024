@@ -90,14 +90,14 @@ const Signup = () => {
                                 className={data.role === "admin" ? "active" : ""}
                                 onClick={() => handleRoleSelect("admin")}
                             >
-                                Admin
+                                
                             </span>
-                            |
+                            
                             <span
                                 className={data.role === "user" ? "active" : ""}
                                 onClick={() => handleRoleSelect("user")}
                             >
-                                User
+                                
                             </span>
                         </div>
                         {error && <div className="error_msg">{error}</div>}

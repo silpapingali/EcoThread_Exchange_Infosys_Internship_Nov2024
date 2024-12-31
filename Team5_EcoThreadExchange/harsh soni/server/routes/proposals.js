@@ -2,14 +2,17 @@ const express = require('express');
 const router = express.Router();
 const Proposal = require('../models/proposal'); 
 
-
 router.post('/accept', async (req, res) => {
-    const { proposalId, acceptedBy } = req.body;
+    const { proposedItemId, selectedItemId, proposedBy, proposedTo } = req.body;
     try {
-        const proposal = await Proposal.findById(proposalId);
+        const proposal = await Proposal.findOne({
+            proposedItemId,
+            selectedItemId,
+            proposedBy,
+            proposedTo
+        });
         if (!proposal) return res.status(404).send({ message: "Proposal not found." });
 
-      
         proposal.accepted = true; 
         proposal.rejected = false; 
         await proposal.save();
@@ -21,14 +24,17 @@ router.post('/accept', async (req, res) => {
     }
 });
 
-
 router.post('/reject', async (req, res) => {
-    const { proposalId, rejectedBy } = req.body;
+    const { proposedItemId, selectedItemId, proposedBy, proposedTo } = req.body;
     try {
-        const proposal = await Proposal.findById(proposalId);
+        const proposal = await Proposal.findOne({
+            proposedItemId,
+            selectedItemId,
+            proposedBy,
+            proposedTo
+        });
         if (!proposal) return res.status(404).send({ message: "Proposal not found." });
 
-     
         proposal.rejected = true; 
         proposal.accepted = false; 
         await proposal.save();
