@@ -144,4 +144,20 @@
     background-color: grey;
   }
   
-  
+  .arrow-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+
+    position: relative;
+    bottom: 20px; /* Adjust this value as needed */
+    left: 210px;
+}
+
+.arrow {
+    cursor: pointer;
+    font-size: 34px;
+    margin: 0 10px;
+    color: #fff;
+    user-select: none;
+}

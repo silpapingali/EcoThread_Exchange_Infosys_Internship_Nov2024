@@ -119,18 +119,4 @@ router.get("/random", async (req, res) => {
   }
 });
 
-// Get all items (with optional search query)
-router.get("/", async (req, res) => {
-    try {
-        const searchQuery = req.query.search || '';
-        const items = await Item.find({
-            deleted: false,
-            title: { $regex: searchQuery, $options: 'i' } // Case-insensitive search
-        });
-        res.status(200).send(items);
-    } catch (error) {
-        res.status(500).send({ message: "Internal Server Error" });
-    }
-});
-
 module.exports = router;

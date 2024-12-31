@@ -105,7 +105,7 @@ const Trades = () => {
       localStorage.setItem('tradeItems', JSON.stringify(tradeData));
 
       // Navigate with state
-      navigate('/after-trades', {
+      navigate('', {
         state: tradeData,
         replace: false
       });
@@ -161,7 +161,7 @@ const Trades = () => {
           </div>
         </div>
 
-        <div className="arrow-container">
+        <div className="arrow-container1">
           <span className="arrow1">↔</span>
         </div>
 
