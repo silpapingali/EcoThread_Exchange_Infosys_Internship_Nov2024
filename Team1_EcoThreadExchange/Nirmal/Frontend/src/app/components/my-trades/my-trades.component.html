@@ -1,0 +1,34 @@
+<style>
+
+</style>
+<div class="recommendations-container">
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="spinner-container">
+    <div class="spinner"></div>
+    <p>Loading recommendations...</p>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="!isLoading && errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <!-- Recommended Trades -->
+  <div *ngIf="!isLoading && !errorMessage && recommendedTrades.length > 0" class="items-grid">
+    <div *ngFor="let trade of recommendedTrades" class="item-card">
+      <h4>{{ trade.item1.title }} for {{ trade.item2.title }}</h4>
+      <p><strong>Traded with:</strong> {{ trade.item2?.username || 'Unknown' }}</p>
+      <p><strong>Date:</strong> {{ trade.createdAt | date }}</p>
+      <p><strong>Status:</strong> {{ trade.status }}</p>
+      <div class="item-image">
+        <img *ngIf="trade.item2?.image" [src]="'http://localhost:3000/uploads/' + trade.item2.image" alt="{{ trade.item2.title }}" />
+        <p *ngIf="!trade.item2?.image">No image available</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Recommendations Message -->
+  <div *ngIf="!isLoading && !errorMessage && recommendedTrades.length === 0" class="no-items">
+    <p>No recommendations available at the moment.</p>
+  </div>
+</div>

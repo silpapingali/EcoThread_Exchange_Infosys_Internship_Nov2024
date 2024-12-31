@@ -1,0 +1,141 @@
+<style>
+  .filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.filters input[type='text'],
+.filters input[type='date'] {
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.filters label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.trade-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.trade-info {
+  flex: 1;
+}
+
+.trade-images {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.trade-images img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.pagination button {
+  padding: 8px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+}
+
+.pagination button.active {
+  background-color: #0056b3;
+  font-weight: bold;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}
+.blocked-message{
+  color:red;
+  font-weight: bold;
+}
+</style>
+<!--
+<div class="trades-container">
+  <h2>All Trades</h2>
+
+  <div class="filters">
+    <input
+      type="text"
+      placeholder="Search (Title, Preference, Username)"
+      [(ngModel)]="searchTerm"
+      (input)="onSearchChange()"
+    />
+    <label>
+      <input
+        type="checkbox"
+        [(ngModel)]="exactMatch"
+        (change)="onExactMatchToggle()"
+      />
+      Exact Match
+    </label>
+    <label>
+      Posted After:
+      <input
+        type="date"
+        [(ngModel)]="postedAfter"
+        (change)="onPostedAfterChange()"
+      />
+    </label>
+  </div>
+
+  <div *ngFor="let trade of trades" class="trade-card">
+    <div class="trade-info">
+      <h3>{{ trade.item1.title }} for {{ trade.item2.title }}</h3>
+      <p>Proposed By: {{ trade.item1.username }}</p>
+      <p>Proposed To: {{ trade.item2.username }}</p>
+      <p>Selected Preference: {{ trade.selectedPreference }}</p>
+      <p>Status: {{ trade.status }}</p>
+      <p>Posted On: {{ trade.createdAt | date:'medium' }}</p>
+      <p *ngIf="!isAdmin && trade.item1.isBlocked" class="blocked-message">Item1 is Blocked by Admin.</p>
+      <p *ngIf="!isAdmin && trade.item2.isBlocked" class="blocked-message">Item2 is Blocked by Admin.</p>
+
+    </div>
+    <div class="trade-images">
+      <div>
+        <p>Item 1:</p>
+        <img [src]="'http://localhost:3000/uploads/' + trade.item1.image[0]" alt="{{ trade.item1.title }}" />
+      </div>
+      <div>
+        <p>Item 2:</p>
+        <img [src]="'http://localhost:3000/uploads/' + trade.item2.image[0]" alt="{{ trade.item2.title }}" />
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination">
+    <button
+      *ngFor="let page of [].constructor(totalPages); let i = index"
+      (click)="onPageChange(i + 1)"
+      [class.active]="currentPage === i + 1"
+    >
+      {{ i + 1 }}
+    </button>
+  </div>
+</div>
+-->
