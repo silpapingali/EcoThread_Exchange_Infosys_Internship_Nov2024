@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body id="container2">
+    <div>
+        <div class="container mx-auto px-4 py-8">
+            <h2 class="text-3xl font-bold text-green-900" style="font-weight: 800; margin-top: 170px; margin-left: 675px;">Login</h2>
+            <form [formGroup]="loginForm" class="space-y-4 bg-pink-100" 
+                  style="text-align: center; opacity: 0.8; border-radius: 30px; width: 500px; height: 370px; margin-left: 500px; margin-top: 2px; box-shadow: 10px 30px 30px rgba(0, 0, 0, 0.8), 10px 40px 80px rgba(0, 0, 0, 0.3);">
+                
+                <!-- Email Input -->
+                <div class="mb-1">
+                    <mat-form-field class="w-96 mt-5">
+                        <mat-label for="email">Email</mat-label>
+                        <input type="email" formControlName="email" matInput required placeholder="Enter your email" 
+                               [attr.aria-invalid]="email?.invalid ? 'true' : 'false'">
+                    </mat-form-field>
+                    <div *ngIf="(email?.touched || isSubmitted) && email?.invalid" class="text-red-500 text-sm mt-0.1">
+                        Please fill the email.
+                    </div>
+                </div>
+
+                <!-- Password Input -->
+                <div class="mb-1">
+                    <mat-form-field class="w-96">
+                        <mat-label for="password">Password</mat-label>
+                        <input type="password" formControlName="password" matInput required placeholder="Enter your password" 
+                               [attr.aria-invalid]="password?.invalid ? 'true' : 'false'">
+                    </mat-form-field>
+                    <div *ngIf="(password?.touched || isSubmitted) && password?.invalid" class="text-red-500 text-sm mt-0.1">
+                        Please fill the password.
+                    </div>
+                </div>
+
+                <!-- Error Message for Non-Activated Account -->
+                <div *ngIf="errorMessage" class="text-red-500 text-sm mt-0.1">
+                    {{ errorMessage }}
+                </div>
+
+                <!-- Submit Button -->
+                <div class="mb-4">
+                    <button type="submit" (click)="login()" 
+                            class="bg-purple-800 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+                        Login
+                    </button>
+                </div>
+
+                <!-- Links -->
+                <div class="text-center">
+                    <a href="http://localhost:4200/forgot-password" class="hover:underline text-blue-600">Forgot Password?</a>
+                    <p>Don't have an account? <a href="http://localhost:4200/register" class="text-purple-800 hover:underline" style="font-weight: 400;">Sign Up</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

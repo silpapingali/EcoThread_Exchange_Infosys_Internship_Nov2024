@@ -1,0 +1,143 @@
+<style>
+  .recommendations-container {
+      max-width: 90vw;
+}
+
+h2 {
+color: #069494;
+text-align: center;
+margin-bottom: 20px;
+}
+
+.spinner-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+color: #333;
+}
+
+.spinner {
+border: 5px solid #f3f3f3;
+border-radius: 50%;
+border-top: 5px solid #45a049;
+width: 40px;
+height: 40px;
+animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+0% {
+  transform: rotate(0deg);
+}
+100% {
+  transform: rotate(360deg);
+}
+}
+
+.error-message {
+color: #ffa500;
+margin-left: 700px;
+justify-content: center;
+align-items: center;
+font-weight: bold;
+}
+
+.items-grid {
+display: grid;
+gap: 20px;
+grid-template-columns: repeat(4, 1fr);
+}
+
+.item-card {
+border: 1px solid #45a049;
+border-radius: 10px;
+padding: 20px;
+width: 320px;
+background-color: #f9f9f9;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+transition: transform 0.2s, box-shadow 0.2s;
+margin-left: 20px;
+}
+
+.item-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.item-card h3 {
+color: #069494;
+}
+
+.preferences-list {
+list-style: none;
+padding: 0;
+margin: 10px 0;
+}
+.item-image img {
+width: 100%;
+max-height: 200px;
+object-fit: cover;
+border-radius: 5px;
+}
+
+.item-image p {
+text-align: center;
+color: #333;
+}
+
+.preferences-list li {
+background-color: #45a049;
+color: #fff;
+display: inline-block;
+padding: 5px 10px;
+border-radius: 15px;
+margin-right: 5px;
+font-size: 0.7rem;
+}
+
+.no-items {
+margin-left: 750px;
+color: #ffa500;
+}
+
+</style>
+<div class="recommendations-container">
+
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="spinner-container">
+    <div class="spinner"></div>
+    <p>Loading recommendations...</p>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="!isLoading && errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <!-- Recommended Items -->
+  <div *ngIf="!isLoading && !errorMessage && recommendedItems.length > 0" class="items-grid">
+    <div *ngFor="let item of recommendedItems" class="item-card">
+      <h5>{{ item.title }}</h5>
+      <ul class="preferences-list">
+        <li *ngFor="let preference of item.preferences">{{ preference }}</li>
+      </ul>
+      <p><strong>Posted by:</strong> {{ item.username || 'Unknown' }}</p>
+      <div class="item-image">
+          <img *ngIf="item.image" [src]="'http://localhost:3000/uploads/' + item.image" alt="{{ item.title }}" />
+          <p *ngIf="!item.image">No image available</p>
+        </div>
+        
+      <button
+      class="butonnn"
+      (click)="onTradeClick(item)"
+    >
+     Trade Now
+    </button>
+    </div>
+  </div>
+
+  <!-- No Recommendations Message -->
+  <div *ngIf="!isLoading && !errorMessage && recommendedItems.length === 0" class="no-items">
+    <p>No recommendations available at the moment.</p>
+  </div>
+</div>

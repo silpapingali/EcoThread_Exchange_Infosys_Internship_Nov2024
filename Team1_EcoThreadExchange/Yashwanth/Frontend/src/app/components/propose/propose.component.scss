@@ -1,0 +1,220 @@
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f7fc;
+  color: #333;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #069494;
+  padding: 15px 30px;
+  color: white;
+  font-family: 'Dancing Script', cursive;
+  font-weight: bold;
+  height: 60px;
+}
+
+.navbar-left .brand-name {
+  font-size: 1.8em;
+}
+
+.navbar-right {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  max-width: 600px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  font-size: 1.2em;
+  padding: 0 20px;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #FFD700;
+  text-decoration: underline;
+}
+
+.propose-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.1);
+  margin: 30px;
+}
+
+/* Updated Selected Item Section */
+.selected-item {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow:12px 12px 12px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 400px;
+}
+
+.selected-item h3 {
+  font-size: 1.8rem;
+  color: #007acc;
+  border-bottom: 3px solid #f4f7fc;
+  padding-bottom: 3px;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+}
+
+.selected-item-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.item-image-large {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 3px solid #007acc;
+  margin-right: 25px;
+}
+
+.selected-item-details {
+  flex: 1;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px 12px;
+  text-align: left;
+}
+
+th {
+  font-weight: bold;
+  color: #007acc;
+  padding-bottom: 10px;
+}
+
+td {
+  color: #555;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.trade-items {
+  flex: 1;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow:12px 12px 12px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.trade-items h3 {
+  font-size: 1.8rem;
+  color: #007acc;
+  margin-bottom: 20px;
+  border-bottom: 3px solid #f4f7fc;
+  padding-bottom: 10px;
+}
+
+.item-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #007acc;
+  margin-bottom: 15px;
+}
+
+p {
+  font-size: 1.1rem;
+  color: #555;
+  margin: 8px 0;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.arrow {
+  background: #007acc;
+  color: white;
+  font-size: 1.5rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, background-color 0.3s;
+}
+
+.arrow:hover {
+  transform: scale(1.1);
+  background: #005f99;
+}
+
+.trade-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.trade-item p {
+  margin: 5px 0;
+}
+
+input[type='radio'] {
+  margin-top: 10px;
+  transform: scale(1.5);
+  cursor: pointer;
+}
+
+.propose-button {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.propose-button button {
+  background: #3e8e41;
+  color: white;
+  font-size: 1.2rem;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.propose-button button:hover {
+  background: #2d6b2f;
+  transform: scale(1.05);
+}

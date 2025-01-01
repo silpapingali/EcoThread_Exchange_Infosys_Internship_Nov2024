@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Threads & Thrift</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Roboto:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-left">
+      <span class="brand-name">Threads & Thrift</span>
+    </div>
+    <div class="navbar-right">
+      <a href="http://localhost:4200/home" class="nav-link">Dashboard</a>
+      <a href="http://localhost:4200/allitems" class="nav-link">Items</a>
+      <a href="http://localhost:4200/mytrades" class="nav-link">Trades</a>
+      <button (click)="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <div class="propose-container">
+    <!-- Selected Item Section -->
+    <div class="selected-item">
+      <h3>Selected Item</h3>
+      <div class="selected-item-content">
+        <img
+          class="item-image-large"
+          [src]="'http://localhost:3000/uploads/' + selectedItem?.image[0]"
+          alt="Selected Item Image"
+          onerror="this.src='assets/no-image.png'"
+        />
+        <div class="selected-item-details">
+          <table>
+            <tr>
+              <th>Title</th>
+              <td>{{ selectedItem?.title }}</td>
+            </tr><hr>
+            <tr>
+              <th>Preferences</th>
+              <td>{{ selectedItem?.preferences?.join(', ') }}</td>
+            </tr><hr>
+            <tr>
+              <th>Posted By</th>
+              <td>{{ selectedItem.username }}</td>
+            </tr><hr>
+            <tr>
+              <th>Size</th>
+              <td>{{ selectedItem.size }}</td>
+            </tr><hr>
+            <tr>
+              <th>Condition</th>
+              <td>{{ selectedItem.condition }}</td>
+            </tr><hr>
+            <tr>
+              <th>Posted On</th>
+              <td>{{ selectedItem.createdAt | date: 'dd-MM-yyyy' }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trade Items Section -->
+    <div class="trade-items">
+      <h3>Select to Trade</h3>
+      <div class="carousel">
+        <button class="arrow left" (click)="previousItem()">&#8592;</button>
+        <div class="trade-item">
+          <img
+            class="item-image"
+            [src]="'http://localhost:3000/uploads/' + allItems[currentItemIndex]?.image[0]"
+            alt="Trade Item Image"
+            onerror="this.src='assets/no-image.png'"
+          />
+          <p><strong>Title:</strong> {{ allItems[currentItemIndex]?.title }}</p>
+          <p><strong>Preferences:</strong> {{ allItems[currentItemIndex]?.preferences?.join(', ') }}</p>
+          <input
+            type="radio"
+            [value]="allItems[currentItemIndex]?._id"
+            name="selectedTradeItem"
+            [(ngModel)]="selectedTradeItemId"
+          />
+        </div>
+        <button class="arrow right" (click)="nextItem()">&#8594;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Propose Trade Button -->
+  <div class="propose-button">
+    <button (click)="proposeTrade()">Propose Trade</button>
+  </div>
+
+</body>
+</html>
