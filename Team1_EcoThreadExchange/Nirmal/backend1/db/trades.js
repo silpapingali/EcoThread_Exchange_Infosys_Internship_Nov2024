@@ -14,16 +14,15 @@ const tradeSchema = new mongoose.Schema(
       required: true
     },
     item1: {
-      type: Object,
+      type:  mongoose.Schema.Types.ObjectId,
       ref:Item,
       required: true
     },
     item2: {
-      type: Object,
+      type:  mongoose.Schema.Types.ObjectId,
       ref:Item,
       required: true
-    },
-    
+    },    
     isAccepted: {
       type: Boolean,
       default: false
