@@ -13,17 +13,17 @@ const tradeSchema = new mongoose.Schema(
       ref: User,
       required: true
     },
-    item1: {
-      type: Object,
+   item1: {
+      type:  mongoose.Schema.Types.ObjectId,
       ref:Item,
       required: true
     },
     item2: {
-      type: Object,
+      type:  mongoose.Schema.Types.ObjectId,
       ref:Item,
       required: true
     },
-    
+
     isAccepted: {
       type: Boolean,
       default: false
