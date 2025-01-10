@@ -65,36 +65,6 @@ router.get('/allitems',verifyToken, async (req, res) => {
         res.status(500).json({ message: 'Failed to fetch items. Please try again later.' });
     }
 });
-/*
-router.get('/myitem', verifyToken, async (req, res) => {
-    try {
-        const userId = req.user.id;
-        const { searchTerm, exactMatch, date, page = 1, pageSize = 4 } = req.query;
-        const filterQuery = buildFilterQuery({ searchTerm, exactMatch, date });
-        filterQuery.userId = userId;
-        filterQuery.isTraded= { $ne: true };
-        //filterQuery.isBlocked = { $ne: true };
-        const skip = (parseInt(page) - 1) * parseInt(pageSize);
-        const items = await MyItem.find(filterQuery)
-            .skip(skip)
-            .limit(parseInt(pageSize))
-            .exec();
-        const totalCount = await MyItem.countDocuments(filterQuery);
-        res.status(200).json({ data: items, totalCount, currentPage: parseInt(page), pageSize: parseInt(pageSize) });
-    } catch (err) {
-        console.error('Error fetching my items:', err);
-        res.status(500).json({ message: 'Failed to fetch items. Please try again later.' });
-    }
-});
-
-
-      // Make sure we filter out blocked and already proposed items
-      filterQuery.isBlocked = { $ne: true };  // Exclude blocked items
-      filterQuery.isTraded = { $ne: true };  // Exclude already proposed items
-  
-*/
-
-
 
 router.get('/myitem', verifyToken, async (req, res) => {
     try {
@@ -148,77 +118,6 @@ router.get('/myitem', verifyToken, async (req, res) => {
       res.status(500).json({ message: 'Failed to fetch items. Please try again later.' });
     }
   });
-  
-
-
-
-
-/*
-router.patch('/block/:id', async (req, res) => {
-    const { id } = req.params;
-    try {
-        const updatedItem = await MyItem.findByIdAndUpdate(
-            id,
-            { isBlocked: true },
-            { new: true } // Return the updated document
-        );
-        if (!updatedItem) {
-            return res.status(404).json({ message: 'Item not found' });
-        }
-
-        const updatedTrades=await trades.updateMany({
-            $or:[
-                {'item1._id':updatedItem._id},
-                {'item2._id':updatedItem._id},
-            ],
-        },{
-            $set:{
-                'item1.isBlocked':true,
-                'item2.isBlocked':true,
-            },
-        });
-
-        res.status(200).json({ message: 'Item successfully blocked', updatedItem,updatedTrades });
-
-        
-    } catch (error) {
-        res.status(500).json({ message: 'An error occurred', error });
-    }
-});
-
-
-router.patch('/unblock/:id', async (req, res) => {
-    const  id  = req.params.id;
-    try {
-      const updatedItem = await MyItem.findByIdAndUpdate(
-        id,
-        { isBlocked: false },
-        { new: true }
-      );
-      if (!updatedItem) {
-        return res.status(404).json({ message: 'Item not found' });
-      }
-      
-      const updatedTrades=await trades.updateMany({
-        $or:[
-            {'item1._id':updatedItem._id},
-            {'item2._id':updatedItem._id},
-        ],
-    },{
-        $set:{
-            'item1.isBlocked':false,
-            'item2.isBlocked':false,
-        },
-    });
-
-    res.status(200).json({ message: 'Item successfully unblocked', updatedItem,updatedTrades });
-     
-    } catch (error) {
-      console.error('Error unblocking item:', error);
-      res.status(500).json({ message: 'An error occurred', error: error.message });
-    }
-});
- */
 
 // Block an item
 router.patch('/block/:id', async (req, res) => {
